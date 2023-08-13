@@ -1,0 +1,56 @@
+<Project>  
+  <PropertyGroup>
+	<VersionSuffix Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">$([System.DateTime]::UtcNow.ToString(HHmmss))</VersionSuffix>
+	<Version Condition="'$(VersionSuffix)'!= ''">$(Version)</Version>
+	<Version Condition="'$(VersionSuffix)' == ''">$(Version)</Version>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Copyright>Copyright (C) 2023 Toenn Vaot Systems</Copyright>
+    <Company>Toenn Vaot</Company>
+    <Authors>Toenn Vaot</Authors>
+	<Deterministic>false</Deterministic>
+    <TargetFramework>net6.0</TargetFramework>
+	<Description>Package for Toenn Vaot system</Description>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)IFS_GEN\nupkgs</PackageOutputPath>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>ToennVaot</PackageTags>
+	<PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">Debug version generated $([System.DateTime]::Now.ToString("dd-MM-yyyy_hh:mm:ss")) on $(ComputerName) by $(UserName)</PackageReleaseNotes>
+	<PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">Released $([System.DateTime]::Now.ToString("dd-MM-yyyy"))</PackageReleaseNotes>
+    <ApplicationIcon>$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <DocumentationFile>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)\$(MSBuildProjectName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <OutputPath>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)</OutputPath>
+  </PropertyGroup>
+  
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'And'$(SolutionName)'!='Thales.Denmark.RestApi'And'$(SolutionName)'!='Thales.Denmark.Acm'">
+	<Exec Command="dotnet nuget delete $(ProjectName) $(Version) --non-interactive -s https://localhost:5001/v3/index.json" ContinueOnError="WarnAndContinue" />
+	<Exec Command="rd /s /q $(MSBuildThisFileDirectory)IFS_GEN\packages\$(ProjectName)" ContinueOnError="WarnAndContinue" />
+  </Target>
+  <Target Name="CopyPackage" AfterTargets="Pack">
+	<Exec Command="dotnet nuget push -s https://localhost:5001/v3/index.json $(PackageOutputPath)\$(ProjectName).$(Version).nupkg --skip-duplicate"/>
+  </Target>
+  
+  <ItemGroup>
+      <None Include="$(MSBuildThisFileDirectory)Documentation\Development_Rules.pdf" PackagePath=""/>
+      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico"/>
+      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.png" Pack="true" PackagePath="\"/>
+      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\LICENSE.txt" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+</Project>

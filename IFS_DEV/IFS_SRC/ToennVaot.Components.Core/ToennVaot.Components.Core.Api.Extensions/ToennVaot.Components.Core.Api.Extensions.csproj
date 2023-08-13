@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">True</GeneratePackageOnBuild>
+    <Title>ToennVaot Components Core Api Extensions</Title>
+    <RepositoryUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenIddict.Abstractions" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToennVaot.Components.Core.Api.Models\ToennVaot.Components.Core.Api.Models.csproj" />
+    <ProjectReference Include="..\ToennVaot.Components.Core\ToennVaot.Components.Core.csproj" />
+  </ItemGroup>
+
+</Project>

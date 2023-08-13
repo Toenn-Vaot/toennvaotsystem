@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">True</GeneratePackageOnBuild>
+    <Title>ToennVaot Components Core</Title>
+    <RepositoryUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToennVaot.Components.Core.Exceptions\ToennVaot.Components.Core.Exceptions.csproj" />
+    <ProjectReference Include="..\ToennVaot.Components.Core.Interfaces\ToennVaot.Components.Core.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
