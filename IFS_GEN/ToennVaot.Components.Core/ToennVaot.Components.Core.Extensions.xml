@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToennVaot.Components.Core.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:ToennVaot.Components.Core.Extensions.DateTimeExtensions">
+            <summary>
+            This class extends <see cref="T:System.DateTime"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.IsInLeapYear(System.DateTime)">
+            <summary>  
+            Indicates whether this date is in leap year.  
+            </summary>  
+            <param name="value">This <see cref="T:System.DateTime"/> instance.</param>  
+            <returns>A boolean value indicating whether this date instance is in leap your.</returns>  
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.CalculateAgeInYears(System.DateTime,System.Nullable{System.DateTime})">
+            <summary>  
+            Calculate the age of a person based on the date of birth.  
+            </summary>  
+            <param name="date">The date of birth of the person.</param>  
+            <param name="baseComparisonDate">The present date. Defaults to <see cref="P:System.DateTime.Now"/>, if not specified.</param>  
+            <remarks>This function supports leaper Birthdate (Feb 29).</remarks>  
+            <returns>Age in years</returns>  
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsLocal(System.DateTime)">
+            <summary>
+            Force the Date kind as Local
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsLocal(System.Nullable{System.DateTime})">
+            <summary>
+            Force the Date kind as Local
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsUtc(System.DateTime)">
+            <summary>
+            Force the Date kind as UTC
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsUtc(System.Nullable{System.DateTime})">
+            <summary>
+            Force the Date kind as UTC
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.ResetTimePart(System.DateTime)">
+            <summary>
+            Reset the Time part to 00:00:00
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.ResetTimePart(System.Nullable{System.DateTime})">
+            <summary>
+            Reset the Time part to 00:00:00
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Extensions.EnumExtensions">
+            <summary>
+            This class extends <see cref="T:System.Enum"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.EnumExtensions.GetFlags(System.Enum)">
+            <summary>
+            Get all enum values contained in bit field value
+            </summary>
+            <param name="value"></param>
+            <returns>The enum values contained in the bit field value</returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Extensions.GenderEnumExtensions">
+            <summary>
+            This class extends <see cref="T:ToennVaot.Components.Core.Models.GenderEnum"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.GenderEnumExtensions.ToPronoun(ToennVaot.Components.Core.Models.GenderEnum)">
+            <summary>
+            Get the equivalent pronoun of the gender enumeration value
+            </summary>
+            <param name="value">The enumeration value</param>
+            <returns>The pronoun</returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Extensions.IAsyncEnumerableExtensions">
+            <summary>
+            This class extends <see cref="T:System.Collections.Generic.IAsyncEnumerable`1"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.IAsyncEnumerableExtensions.ToListAsync``1(System.Collections.Generic.IAsyncEnumerable{``0})">
+            <summary>
+            Get the list of <typeparamref name="T"/> objects
+            </summary>
+            <typeparam name="T">The type of object</typeparam>
+            <param name="source">The async enumerable collection</param>
+            <returns>The list of <typeparamref name="T"/> objects</returns>
+        </member>
+    </members>
+</doc>

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToennVaot.Components.Core.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToennVaot.Components.Core.Api.Extensions", "ToennVaot.Components.Core.Api.Extensions\ToennVaot.Components.Core.Api.Extensions.csproj", "{2351F93F-9509-4626-930A-F2F2474FA470}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToennVaot.Components.Core.Api.Extensions.Tests", "ToennVaot.Components.Core.Api.Extensions.Tests\ToennVaot.Components.Core.Api.Extensions.Tests.csproj", "{88CF78EB-C0A7-4C76-AEA1-68B6BE9D2A56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{2351F93F-9509-4626-930A-F2F2474FA470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2351F93F-9509-4626-930A-F2F2474FA470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2351F93F-9509-4626-930A-F2F2474FA470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88CF78EB-C0A7-4C76-AEA1-68B6BE9D2A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CF78EB-C0A7-4C76-AEA1-68B6BE9D2A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CF78EB-C0A7-4C76-AEA1-68B6BE9D2A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CF78EB-C0A7-4C76-AEA1-68B6BE9D2A56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

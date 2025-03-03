@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToennVaot.Components.Core.Api.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:ToennVaot.Components.Core.Api.Extensions.ClaimsPrincipalExtensions">
+            <summary>
+            This class extends the <see cref="T:System.Security.Claims.ClaimsPrincipal"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.ClaimsPrincipalExtensions.IsCustomerAuthentication(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Indicates if the <paramref name="principal"/> has been provided through a customer authentication
+            </summary>
+            <param name="principal">The claims principal instance</param>
+            <returns>True if claims principal has grant type client credentials</returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.ClaimsPrincipalExtensions.IsApplicationAuthentication(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Indicates if the <paramref name="principal"/> has been provided through an application authentication
+            </summary>
+            <param name="principal">The claims principal instance</param>
+            <returns>True if claims principal has grant type authorization code</returns>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.ClaimsPrincipalExtensions.IsDeviceAuthentication(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Indicates if the <paramref name="principal"/> has been provided through a device authentication
+            </summary>
+            <param name="principal">The claims principal instance</param>
+            <returns>True if claims principal has grant type device code</returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions">
+            <summary>
+            This class extents <see cref="T:ToennVaot.Components.Core.Api.Models.Hal.Representation"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddSelfRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link "self"
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddSelfRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link)">
+            <summary>
+            Add the relation link "self"
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddSearchRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link "search"
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddSearchRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link)">
+            <summary>
+            Add the relation link "search"
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddFirstRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link "first" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddFirstRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link)">
+            <summary>
+            Add the relation link "first" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddPreviousRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link "previous" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddPreviousRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link)">
+            <summary>
+            Add the relation link "previous" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddNextRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link "next" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddNextRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link)">
+            <summary>
+            Add the relation link "next" in pagination context
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,System.String,System.String,System.Net.Http.HttpMethod)">
+            <summary>
+            Add the relation link described by <paramref name="rel"/>
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="rel">The relation type</param>
+            <param name="url">The url of link</param>
+            <param name="method">The HTTP method</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Extensions.RepresentationExtensions.AddRelation(ToennVaot.Components.Core.Api.Models.Hal.Representation,ToennVaot.Components.Core.Api.Models.Hal.Link,System.String)">
+            <summary>
+            Add the relation described by <paramref name="rel"/> with <paramref name="link"/> value
+            </summary>
+            <param name="item">The extent object</param>
+            <param name="link">The link</param>
+            <param name="rel">The relation type</param>
+        </member>
+    </members>
+</doc>

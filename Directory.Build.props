@@ -6,11 +6,11 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Copyright>Copyright (C) 2023 Toenn Vaot Systems</Copyright>
+    <Copyright>Copyright (C) 2025 Toenn Vaot Systems</Copyright>
     <Company>Toenn Vaot</Company>
     <Authors>Toenn Vaot</Authors>
 	<Deterministic>false</Deterministic>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 	<Description>Package for Toenn Vaot system</Description>
     <PackageOutputPath>$(MSBuildThisFileDirectory)IFS_GEN\nupkgs</PackageOutputPath>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

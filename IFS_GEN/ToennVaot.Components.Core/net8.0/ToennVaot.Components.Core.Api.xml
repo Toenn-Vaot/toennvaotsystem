@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToennVaot.Components.Core.Api</name>
+    </assembly>
+    <members>
+        <member name="T:ToennVaot.Components.Core.Api.ApiConfigurationBase">
+            <summary>
+            The API Configuration base class
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.ApiConfigurationBase.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure API with the minimum services to use
+            </summary>
+            <param name="app">The application builder instance</param>
+            <param name="env">The hosting environment</param>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Converters.InheritanceConverter">
+            <summary>
+            The json converter to manage the inheritance of an object
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.Discriminator">
+            <summary>
+            Default name for the discriminator property
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.CanConvert(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.CanWrite">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Converters.InheritanceConverter.GetSubType(System.String,System.Reflection.MemberInfo)">
+            <summary>
+            Get sub-type via KnownTypeAttributes
+            </summary>
+            <param name="derivedTypeName">The target type name which corresponds to the discriminator</param>
+            <param name="baseType">The base type</param>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.CoreConfiguration">
+            <summary>
+            Class configuration usage, used from the host class
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.CoreConfiguration.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure the service dependency injections
+            </summary>
+            <param name="services">The service collection instance</param>
+            <param name="configuration">The configuration instance</param>
+            <param name="currentEnvironment"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.CoreConfiguration.GetMappingProfiles">
+            <summary>
+                Method to get the auto-mapper profiles to load
+            </summary>
+            <returns>The list of mapping profiles</returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Actions.EodResponseCacheFilter">
+            <summary>
+            The End Of Day response cache filter
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Filters.Actions.EodResponseCacheFilter.Configuration">
+            <summary>
+            The configuration instance
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.EodResponseCacheFilter.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="configuration">The configuration instance</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.EodResponseCacheFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.EodResponseCacheFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Actions.LogInputOutputActionFilter">
+            <summary>
+            Action filter to log input and output of API action
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.LogInputOutputActionFilter.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger">The logger instance</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.LogInputOutputActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.LogInputOutputActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Actions.SelfLinkResponseActionFilter">
+            <summary>
+            Action filter to add its proper URL in result HAL object
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.SelfLinkResponseActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Actions.SelfLinkResponseActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Actions.SwaggerRemoveActionAttribute">
+            <summary>
+            This attribute is used to tag an API endpoint to be removed of the swagger documentation
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Actions.SwaggerRemoveControllerFilterAttribute">
+            <summary>
+            This attribute is used to tag an API controller to be removed of the swagger documentation
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Query.IFilterParameters`1">
+            <summary>
+            The interface defines the base of filter parameter collection which can be used in request
+            </summary>
+            <typeparam name="T">The input object type to apply filter</typeparam>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Query.IFilterParameters`1.Construct">
+            <summary>
+            Construct the filter expression
+            </summary>
+            <returns>The filter expression</returns>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Query.IFilterPagingParameters">
+            <summary>
+            The interface defines the base of filter parameter collection which can be used in request with pagination of results
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Filters.Query.IFilterPagingParameters.Page">
+            <summary>
+            The page number
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Filters.Query.IFilterPagingParameters.PageSize">
+            <summary>
+            The page size
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Query.IFilterSortingParameters">
+            <summary>
+            The interface defines the base of filter parameter collection which can be used in request with ordering of results
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Filters.Query.IFilterSortingParameters.SortDirection">
+            <summary>
+            The sort direction
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.ApplicationOnlyAuthenticationModeFilterAttribute">
+            <summary>
+            Action filter attribute to filter action when customer identifier is a part of request path
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.ApplicationOnlyAuthenticationModeFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.CustomerOnlyAuthenticationModeFilterAttribute">
+            <summary>
+            Action filter attribute to filter action when customer identifier is a part of request path
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.CustomerOnlyAuthenticationModeFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.DeviceOnlyAuthenticationModeFilterAttribute">
+            <summary>
+            Action filter attribute to filter action when customer identifier is a part of request path
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.DeviceOnlyAuthenticationModeFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.PolymorphismDocumentFilter`1">
+            <summary>
+            The polymorphism filter to add into the document the derived classes
+            </summary>
+            <typeparam name="T">The abstract/base class to integrate derivations</typeparam>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.PolymorphismDocumentFilter`1.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.PolymorphismSchemaFilter`1">
+            <summary>
+            The polymorphism filter to add into the schema the derived classes
+            </summary>
+            <typeparam name="T">The abstract/base class to integrate derivations</typeparam>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.PolymorphismSchemaFilter`1.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerAssignOAuth2ResponsesOperationFilter">
+            <summary>
+            Operation filter to add automatically responses in case of authorization is required on operation (i.e 401, 403, ...)
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerAssignOAuth2ResponsesOperationFilter.#ctor(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="xmlDoc">The XML document to explore to retrieve comments on method to decorate</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerAssignOAuth2ResponsesOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritDoc/>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDefaultValuesOperationFilter">
+            <summary>
+            Operation filter to add default values in swagger documentation 
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDefaultValuesOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDisplayObsoleteOperationFilter">
+            <summary>
+            Operation filter to display the restrictions applied on the endpoint
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDisplayObsoleteOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritDoc/>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDisplayPermissionsOperationFilter">
+            <summary>
+            Operation filter to display the permissions required to use the endpoint
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerDisplayPermissionsOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritDoc/>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerRemoveEndpointDocumentFilter">
+            <summary>
+            Operation filter to display the restrictions applied on the endpoint
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerRemoveEndpointDocumentFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerRemoveVersionInTagsOperationFilter">
+            <summary>
+            Operation filter to remove the version in Controller name used to defined section in API
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Filters.Swagger.SwaggerRemoveVersionInTagsOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritDoc/>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Infrastructure.VersionedActionSelector">
+            <summary>
+            API Version selector class
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Infrastructure.VersionedActionSelector.#ctor(Microsoft.AspNetCore.Mvc.Infrastructure.IActionDescriptorCollectionProvider,System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintProvider},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.Versioning.ApiVersioningOptions},Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.AspNetCore.Mvc.Routing.IApiVersionRoutePolicy)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="actionDescriptorCollectionProvider">The action descriptor collection provider</param>
+            <param name="actionConstraintProviders">The action constraint providers</param>
+            <param name="options">The options</param>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="routePolicy">The route policy</param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Infrastructure.VersionedActionSelector.SelectBestCandidate(Microsoft.AspNetCore.Routing.RouteContext,System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor})">
+            <inheritdoc />
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Profiles.CoreProfile">
+            <summary>
+            The mapping profile for project models
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Profiles.CoreProfile.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Results.Interfaces.IFilterResults`1">
+            <summary>
+            The interface defines the base of filter results which can be used in request response
+            </summary>
+            <typeparam name="T">The object type of the result items</typeparam>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Results.Interfaces.IFilterResults`1.Items">
+            <summary>
+            The result items collection
+            </summary>
+        </member>
+        <member name="P:ToennVaot.Components.Core.Api.Results.Interfaces.IFilterResults`1.HasMoreItems">
+            <summary>
+            Indicates there are more items
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Results.PdfContentResult">
+            <summary>
+            Represents an <see cref="T:Microsoft.AspNetCore.Mvc.FileContentResult"/> that when executed will write a PDF file content as the response.
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Results.PdfContentResult.#ctor(System.Byte[])">
+            <summary>
+            Constructor
+            </summary>
+            <param name="fileContents">The binary content of the file</param>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Api.Security.Attributes.AuthorizeOIDCAttribute">
+            <summary>
+            Authorize attribute to apply permission restrictions
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Authorization.AuthorizeAttribute"/>
+            <seealso cref="T:ToennVaot.Components.Core.Security.Permissions.PermissionEnum"/>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Security.Attributes.AuthorizeOIDCAttribute.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Api.Security.Attributes.AuthorizeOIDCAttribute.#ctor(ToennVaot.Components.Core.Security.Permissions.PermissionEnum[])">
+            <summary>
+            Constructor with permission
+            </summary>
+            <param name="permissions">The list of permissions to apply</param>
+        </member>
+    </members>
+</doc>
