@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToennVaot.Components.Core.Extensions.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:ToennVaot.Components.Core.Extensions.Tests.GenderEnumExtensionsTests">
+            <summary>
+            The unit test class for <see cref="T:ToennVaot.Components.Core.Extensions.GenderEnumExtensions"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.GenderEnumExtensionsTests.Setup">
+            <summary>
+            Set up the unit test class
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.GenderEnumExtensionsTests.ToPronounTest(ToennVaot.Components.Core.Models.GenderEnum,System.String)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.GenderEnumExtensions.ToPronoun(ToennVaot.Components.Core.Models.GenderEnum)"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.GenderEnumExtensionsTests.ToPronounThrowsArgumentOutOfRangeExceptionTest(ToennVaot.Components.Core.Models.GenderEnum)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.GenderEnumExtensions.ToPronoun(ToennVaot.Components.Core.Models.GenderEnum)"/>
+            </summary>
+        </member>
+        <member name="T:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests">
+            <summary>
+            The unit test class for <see cref="T:ToennVaot.Components.Core.Extensions.DateTimeExtensions"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.Setup">
+            <summary>
+            Set up the unit test class
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.IsInLeapYearTest(System.DateTime)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.IsInLeapYear(System.DateTime)"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.CalculateAgeInYearsWithBirthdayNotPassedTest(System.DateTime)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.CalculateAgeInYears(System.DateTime,System.Nullable{System.DateTime})"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.CalculateAgeInYearsWithBirthdayPassedTest">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.CalculateAgeInYears(System.DateTime,System.Nullable{System.DateTime})"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.CalculateAgeInYearsWithBirthdayPassedForSomeoneBirth29FebruaryTest">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.CalculateAgeInYears(System.DateTime,System.Nullable{System.DateTime})"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.CalculateAgeInYearsThrowsArgumentOutOfRangeExceptionTest">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.CalculateAgeInYears(System.DateTime,System.Nullable{System.DateTime})"/>
+            </summary>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.SpecifyKindAsLocalTest(System.DateTime)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsLocal(System.DateTime)"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.SpecifyKindAsLocalTest(System.Nullable{System.DateTime})">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsLocal(System.Nullable{System.DateTime})"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.SpecifyKindAsUtcTest(System.DateTime)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsUtc(System.DateTime)"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.SpecifyKindAsUtcTest(System.Nullable{System.DateTime})">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.SpecifyKindAsUtc(System.Nullable{System.DateTime})"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.ResetTimePartTest(System.DateTime)">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.ResetTimePart(System.DateTime)"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+        <member name="M:ToennVaot.Components.Core.Extensions.Tests.DateTimeExtensionsTests.ResetTimePartTest(System.Nullable{System.DateTime})">
+            <summary>
+            Test <see cref="M:ToennVaot.Components.Core.Extensions.DateTimeExtensions.ResetTimePart(System.DateTime)"/>
+            </summary>
+            <param name="date"></param>
+        </member>
+    </members>
+</doc>
