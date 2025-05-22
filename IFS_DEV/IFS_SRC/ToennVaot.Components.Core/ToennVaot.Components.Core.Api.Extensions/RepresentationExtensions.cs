@@ -3,7 +3,7 @@
 namespace ToennVaot.Components.Core.Api.Extensions
 {
     /// <summary>
-    /// This class extents <see cref="Representation"/>
+    /// This class extends <see cref="Representation"/>
     /// </summary>
     public static class RepresentationExtensions
     {
@@ -15,6 +15,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddSelfRelation(this Representation item, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddSelfRelation(new Link { Href = url, Method = method });
         }
         
@@ -36,6 +37,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddSearchRelation(this Representation item, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddSearchRelation(new Link { Href = url, Method = method });
         }
 
@@ -57,6 +59,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddFirstRelation(this Representation item, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddFirstRelation(new Link { Href = url, Method = method });
         }
 
@@ -78,6 +81,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddPreviousRelation(this Representation item, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddPreviousRelation(new Link { Href = url, Method = method });
         }
         
@@ -99,6 +103,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddNextRelation(this Representation item, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddNextRelation(new Link { Href = url, Method = method });
         }
         
@@ -121,6 +126,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <param name="method">The HTTP method</param>
         public static void AddRelation(this Representation item, string rel, string url, HttpMethod method)
         {
+            if (string.IsNullOrWhiteSpace(url)) return;
             item.AddRelation(new Link { Rel = rel, Href = url, Method = method }, rel);
         }
 

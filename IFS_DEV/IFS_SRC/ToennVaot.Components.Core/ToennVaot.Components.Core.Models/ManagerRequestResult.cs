@@ -30,7 +30,7 @@
         /// <summary>
         /// The list of exceptions occurred during operation.
         /// </summary>
-        public List<Exception> Exceptions { get; set; } = new List<Exception>();
+        public List<Exception> Exceptions { get; set; } = new();
 
         /// <summary>
         /// Flag indicating whether if the operation succeeded or not.

@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ToennVaot.Components.Core.Api.Exceptions;
 
 namespace ToennVaot.Components.Core.Api.Converters
 {
@@ -32,7 +34,7 @@ namespace ToennVaot.Components.Core.Api.Converters
             //Get discriminator
             var discriminator = jDerivedObject.Value<string>(Discriminator);
             if (string.IsNullOrWhiteSpace(discriminator))
-                throw new Exception("Invalid discriminator value");
+                throw new MissingJsonPropertyValueException("Invalid discriminator value");
 
             //Get the type
             var derivedType = GetSubType(discriminator, objectType);
@@ -54,16 +56,16 @@ namespace ToennVaot.Components.Core.Api.Converters
         public override bool CanWrite => false;
 
         /// <summary>
-        /// Get sub-type via KnownTypeAttributes
+        /// Get subtype via KnownTypeAttributes
         /// </summary>
         /// <param name="derivedTypeName">The target type name which corresponds to the discriminator</param>
         /// <param name="baseType">The base type</param>
-        private Type GetSubType(string derivedTypeName, MemberInfo baseType)
+        private static Type GetSubType(string derivedTypeName, MemberInfo baseType)
         {
-            var knownTypes = baseType.GetCustomAttributes(false).Where(ca => ca.GetType().Name == "KnownTypeAttribute").ToList();
+            var knownTypes = baseType.GetCustomAttributes(false).Where(ca => ca.GetType().Name == nameof(KnownTypeAttribute)).ToList();
 
-            if (knownTypes == null || knownTypes.Count == 0)
-                throw new Exception($"Couldn't find any KnownAttributes over the base {baseType.Name}. Please define at least one KnownTypeAttribute to determine the sub-type");
+            if (knownTypes is not { Count: not 0 })
+                throw new MissingKnownTypeAttributeException(baseType.Name);
 
             foreach (dynamic type in knownTypes)
             {
@@ -71,7 +73,7 @@ namespace ToennVaot.Components.Core.Api.Converters
                     return type.Type;
             }
 
-            throw new Exception($"Discriminator '{derivedTypeName}' doesn't match any of the defined sub-types via KnownTypeAttributes");
+            throw new DiscriminatorOutOfRangeException(derivedTypeName);
         }
     }
 }
