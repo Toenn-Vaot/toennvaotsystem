@@ -1,0 +1,169 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Globalization" #>
+
+using System.Diagnostics.CodeAnalysis;
+
+namespace ToennVaot.Components.Core.Models.Countries
+{
+    ///<summary>
+    /// The base class definition for country
+    ///</summary>
+    public abstract class Country
+    {
+        ///<summary>
+        /// ISO-3166 alpha 2 code
+        ///</summary>
+        public abstract string IsoCodeAlpha2 { get; }
+
+        ///<summary>
+        /// ISO-3166 alpha 3 code
+        ///</summary>
+        public abstract string IsoCodeAlpha3 { get; }
+    
+        ///<summary>
+        /// ISO-3166 numeric code
+        ///</summary>
+        public abstract int IsoCodeId { get; }
+    
+        ///<summary>
+        /// ISO-3166 region name
+        ///</summary>
+        public abstract RegionsEnum RegionName { get; }
+    
+        ///<summary>
+        /// ISO-3166 top-level domain
+        ///</summary>
+        public abstract string TopLevelDomain { get; }
+    
+        ///<summary>
+        /// The country name per language
+        ///</summary>
+        [SuppressMessage("ReSharper", "StringLiteralTypo")]
+        public abstract Dictionary<string, string> CountryNames { get; }
+    }
+
+<#
+    // Define the path to your CSV file
+    string csvFilePath = @"ToennVaot.Components.Core.Models\data\country-codes.csv";
+    
+    // Read all lines from the CSV file
+    var csvLines = File.ReadLines(csvFilePath); // Skip the header line
+    
+    var countryFactoryLines = new List<string>();
+    var countryIdFactoryLines = new List<string>();
+
+    using (var reader = new StreamReader(csvFilePath))
+    {
+        var count = 0;
+        foreach (var line in csvLines)
+        {
+            if(count == 0) { count++; continue; };
+
+            // Split each line by comma
+            var columns = line.Split(';');
+  
+            // Extract the necessary values
+            var countryCode = columns[2].Trim().Trim('"');
+            var isoAlpha2 = columns[9].Trim().Trim('"');
+            var isoAlpha3 = columns[2].Trim().Trim('"');
+            var isoNumeric = columns[5].Trim();
+            var topLevelDomain = columns[49].Trim().Trim('"');
+
+            var regionName = columns[43].Trim();
+
+            var countryName = columns[40].Trim().Trim('"');
+            var countryNameCn = columns[39].Trim().Trim('"');
+            var countryNameRu = columns[46].Trim().Trim('"');
+            var countryNameFr = columns[16].Trim().Trim('"');
+            var countryNameEs = columns[37].Trim().Trim('"');
+            var countryNameAr = columns[31].Trim().Trim('"');
+
+            // Generate a valid C# class name by removing spaces from the country name
+            var className = new CultureInfo("en-US",false).TextInfo.ToTitleCase(countryName.ToLower()).Replace("'", "").Replace("-", "").Replace(" ", "").Split(',')[0].Split('(')[0];
+
+            // Special case
+            if(new [] { "MAC", "HKG" }.Contains(isoAlpha3)) {
+                className += $"_{isoAlpha3}";
+            }
+
+            // Generate the C# class for each country
+#>
+
+    ///<summary>
+    /// The class definition for country of <#= countryName #>
+    ///</summary>
+    public class <#= className #> : Country
+    {
+        /// <inheritDoc />
+        public override string IsoCodeAlpha2 => "<#= isoAlpha2 #>";
+        
+        /// <inheritDoc />
+        public override string IsoCodeAlpha3 => "<#= isoAlpha3 #>";
+    
+        /// <inheritDoc />
+        public override int IsoCodeId => <#= isoNumeric #>;
+    
+        /// <inheritDoc />
+        public override RegionsEnum RegionName => RegionsEnum.<#= string.IsNullOrWhiteSpace(regionName) ? "Unknown" : regionName #>;
+    
+        /// <inheritDoc />
+        public override string TopLevelDomain => "<#= topLevelDomain #>";
+    
+        /// <inheritDoc />
+        public override Dictionary<string, string> CountryNames => new()
+        {
+            { "en", "<#= countryName #>" }, // Default to English as country name
+            { "cn", "<#= countryNameCn #>" },
+            { "ru", "<#= countryNameRu #>" },
+            { "fr", "<#= countryNameFr #>" },
+            { "es", "<#= countryNameEs #>" },
+            { "ar", "<#= countryNameAr #>" },
+        };
+    }
+<#
+            count++;
+        }
+    }
+#>
+    
+    ///<summary>
+    /// The list of all available Earth regions
+    ///</summary>
+    public enum RegionsEnum {        
+        ///<summary>
+        /// Unknown region
+        ///</summary>
+        Unknown = 0,        
+        ///<summary>
+        /// The americas
+        ///</summary>
+        Americas = 1,      
+        ///<summary>
+        /// Africa
+        ///</summary>
+        Africa = 2,        
+        ///<summary>
+        /// Asia
+        ///</summary>
+        Asia = 3,        
+        ///<summary>
+        /// Europe
+        ///</summary>
+        Europe = 4,        
+        ///<summary>
+        /// Middle-East
+        ///</summary>
+        MiddleEast = 5,        
+        ///<summary>
+        /// Oceania
+        ///</summary>
+        Oceania = 6
+    }
+}

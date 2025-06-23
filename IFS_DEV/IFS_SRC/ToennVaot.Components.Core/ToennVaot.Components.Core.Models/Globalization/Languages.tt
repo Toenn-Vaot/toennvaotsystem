@@ -1,0 +1,96 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Globalization" #>
+
+using System.Diagnostics.CodeAnalysis;
+
+namespace ToennVaot.Components.Core.Models.Languages
+{
+    ///<summary>
+    /// The base class definition for language
+    ///</summary>
+    public abstract class Language
+    {
+        ///<summary>
+        /// ISO-3166 alpha 2 code
+        ///</summary>
+        public abstract string IsoCodeAlpha2 { get; }
+
+        ///<summary>
+        /// ISO-3166 alpha 3 code
+        ///</summary>
+        public abstract string IsoCodeAlpha3 { get; }
+    
+        ///<summary>
+        /// The language name per language
+        ///</summary>
+        [SuppressMessage("ReSharper", "StringLiteralTypo")]
+        public abstract Dictionary<string, string> LanguageNames { get; }
+    }
+
+<#
+    // Define the path to your CSV file
+    string csvFilePath = @"ToennVaot.Components.Core.Models\data\languages-codes.csv";
+    
+    // Read all lines from the CSV file
+    var csvLines = File.ReadLines(csvFilePath); // Skip the header line
+    
+    using (var reader = new StreamReader(csvFilePath))
+    {
+        var count = 0;
+        foreach (var line in csvLines)
+        {
+            if(count == 0) { count++; continue; };
+
+            // Split each line by comma
+            var columns = line.Split(';');
+  
+            // Extract the necessary values
+            var isoAlpha2 = columns[2].Trim().Trim('"');
+            if(string.IsNullOrWhiteSpace(isoAlpha2)) continue;
+
+            var isoAlpha3 = columns[0].Trim().Trim('"');
+            var languageName = columns[3].Trim().Trim('"');
+            var languageNameFr = columns[4].Trim().Trim('"');
+
+            // Generate a valid C# class name by removing spaces from the language name
+            var className = new CultureInfo("en-US",false).TextInfo.ToTitleCase(languageName.ToLower()).Replace("'", "").Replace("-", "").Replace(" ", "").Split(',')[0].Split('(')[0];
+
+            // Special case
+            if(new [] { "nbl", "nde" }.Contains(isoAlpha3)) {
+                className += $"_{isoAlpha3}";
+            }
+
+            // Generate the C# class for each language
+#>
+
+    ///<summary>
+    /// The class definition for language of <#= languageName #>
+    ///</summary>
+    public class <#= className #> : Language
+    {
+        /// <inheritDoc />
+        public override string IsoCodeAlpha2 => "<#= isoAlpha2 #>";
+        
+        /// <inheritDoc />
+        public override string IsoCodeAlpha3 => "<#= isoAlpha3 #>";
+    
+        /// <inheritDoc />
+        public override Dictionary<string, string> LanguageNames => new()
+        {
+            { "en", "<#= languageName #>" }, // Default to English as language name
+            { "fr", "<#= languageNameFr #>" },
+        };
+    }
+<#
+            count++;
+        }
+    }
+#>
+}

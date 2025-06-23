@@ -39,14 +39,6 @@
     <OutputPath>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)</OutputPath>
   </PropertyGroup>
   
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'And'$(SolutionName)'!='Thales.Denmark.RestApi'And'$(SolutionName)'!='Thales.Denmark.Acm'">
-	<Exec Command="dotnet nuget delete $(ProjectName) $(Version) --non-interactive -s https://localhost:5001/v3/index.json" ContinueOnError="WarnAndContinue" />
-	<Exec Command="rd /s /q $(MSBuildThisFileDirectory)IFS_GEN\packages\$(ProjectName)" ContinueOnError="WarnAndContinue" />
-  </Target>
-  <Target Name="CopyPackage" AfterTargets="Pack">
-	<Exec Command="dotnet nuget push -s https://localhost:5001/v3/index.json $(PackageOutputPath)\$(ProjectName).$(Version).nupkg --skip-duplicate"/>
-  </Target>
-  
   <ItemGroup>
       <None Include="$(MSBuildThisFileDirectory)Documentation\Development_Rules.pdf" PackagePath=""/>
       <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico"/>
