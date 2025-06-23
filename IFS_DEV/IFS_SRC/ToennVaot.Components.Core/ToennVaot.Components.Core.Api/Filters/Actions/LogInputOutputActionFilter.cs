@@ -27,7 +27,7 @@ namespace ToennVaot.Components.Core.Api.Filters.Actions
         {
             var uri = context.HttpContext.Request.GetDisplayUrl();
             var status = (HttpStatusCode) Enum.Parse(typeof(HttpStatusCode), context.HttpContext.Response.StatusCode.ToString());
-            _logger.LogInformation($"RESPONSE [{uri}] - {status:G}({status:D})");
+            _logger.LogInformation("RESPONSE [{Uri}] - {StatusName:G}({StatusValue:D})", uri, status, status);
         }
 
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace ToennVaot.Components.Core.Api.Filters.Actions
             var uri = context.HttpContext.Request.GetDisplayUrl();
             var parameters = context.ActionDescriptor.Parameters.Select(x => new { x.Name, Value = context.RouteData.Values[x.Name] });
 
-            _logger.LogInformation($"CALL [{uri}]:{JsonConvert.SerializeObject(parameters, Formatting.None)}");
+            _logger.LogInformation("CALL [{Uri}]:{Parameters}", uri, JsonConvert.SerializeObject(parameters, Formatting.None));
         }
     }
 }

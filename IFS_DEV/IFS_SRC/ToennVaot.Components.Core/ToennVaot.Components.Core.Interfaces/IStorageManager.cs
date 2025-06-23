@@ -14,13 +14,13 @@ namespace ToennVaot.Components.Core.Interfaces
         /// <summary>
         /// Get a new database connection
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The database connection instance</returns>
         T GetConnection();
 
         /// <summary>
         /// Get a new database connection with an associated transaction
         /// </summary>
-        /// <returns></returns>
-        Tuple<T, DbTransaction> GetConnectionWithTransaction();
+        /// <returns>The database connection instance and its attached database transaction</returns>
+        Tuple<T, TU> GetConnectionWithTransaction();
     }
 }

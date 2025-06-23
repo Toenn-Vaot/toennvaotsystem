@@ -40,11 +40,11 @@ namespace ToennVaot.Components.Core.Stores
         }
 
         /// <inheritdoc />
-        public virtual Tuple<T, DbTransaction> GetConnectionWithTransaction()
+        public virtual Tuple<T, TU> GetConnectionWithTransaction()
         {
             var connection = new T { ConnectionString = Options.ConnectionString };
-            var transaction = connection.BeginTransaction();
-            return new Tuple<T, DbTransaction> (connection, transaction);
+            var transaction = (TU)connection.BeginTransaction();
+            return new Tuple<T, TU> (connection, transaction);
         }
     }
 }

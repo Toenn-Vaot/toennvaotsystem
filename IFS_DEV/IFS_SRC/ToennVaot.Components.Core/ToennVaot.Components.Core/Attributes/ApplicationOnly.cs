@@ -3,5 +3,6 @@
     /// <summary>
     /// Attribute to indicate the field should be available only for application
     /// </summary>
-    public class ApplicationOnly : Attribute { }
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ApplicationOnlyAttribute : Attribute { }
 }

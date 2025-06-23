@@ -3,5 +3,6 @@
     /// <summary>
     /// Attribute to indicate the field should be available only for user
     /// </summary>
-    public class UserOnly : Attribute { }
+    [AttributeUsage(AttributeTargets.Property)]
+    public class UserOnlyAttribute : Attribute { }
 }

@@ -3,5 +3,6 @@
     /// <summary>
     /// Attribute to indicate the field should serialize only the date part of DateTime
     /// </summary>
-    public class SerializeDateOnly : Attribute { }
+    [AttributeUsage(AttributeTargets.Property)]
+    public class SerializeDateOnlyAttribute : Attribute { }
 }
