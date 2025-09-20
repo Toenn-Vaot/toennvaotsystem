@@ -144,22 +144,3 @@ Il définit les types d’authentification (application vs utilisateur), les per
 C’est le cœur du contrôle d’accès dans l’écosystème.
 
 ---
-
-## ToennVaot.Components.Core.Storage
-
-Projet prévu comme point d’extension pour le **stockage des données**.  
-Il fournit l’abstraction permettant d’implémenter différents backends (SQL Server, MySQL, etc.).
-
----
-
-## ToennVaot.Components.Core.Storage.Mysql
-
-Implémentation du **stockage MySQL**.  
-Elle fournit un gestionnaire capable d’ouvrir une connexion MySQL et d’exécuter des opérations de persistance dans ce SGBD.
-
----
-
-## ToennVaot.Components.Core.Storage.SqlServer
-
-Implémentation du **stockage SQL Server**.  
-Elle fournit un gestionnaire spécifique à SQL Server basé sur Entity Framework Core pour gérer les connexions et opérations dans ce moteur.
