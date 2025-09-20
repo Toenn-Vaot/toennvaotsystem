@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore IFS_DEV/IFS_SRC/ToennVaot.Components.Core.sln
+      run: dotnet restore IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln
     - name: Build
-      run: dotnet build IFS_DEV/IFS_SRC/ToennVaot.Components.Core.sln --no-restore
+      run: dotnet build IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln --no-restore
     - name: Test
-      run: dotnet test IFS_DEV/IFS_SRC/ToennVaot.Components.Core.sln --no-build --verbosity normal
+      run: dotnet test IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln --no-build --verbosity normal
