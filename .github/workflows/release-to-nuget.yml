@@ -4,42 +4,29 @@
 name: Release to NuGet
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  build-pack-push:
+
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-  
+
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    
     - name: Restore dependencies
-      run: dotnet restore
-    
+      run: dotnet restore IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln
     - name: Build
-      run: dotnet build IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-restore
-    
+      run: dotnet build IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln --no-restore
     - name: Test
-      run: dotnet test IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-build --verbosity normal
-    
-  pack:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
-    steps:
-      - name: Pack
-        run: dotnet pack IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-build --output .
-  
-  push:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
-    steps:
-      - name: Push
-        run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
+      run: dotnet test IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-build --output .
+    - name: Push
+      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
