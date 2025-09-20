@@ -23,13 +23,13 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build -c Release --no-restore
+      run: dotnet build IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-restore
       
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal
+      run: dotnet test IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-build --verbosity normal
 
     - name: Pack
-      run: dotnet pack -c Release --no-build --output .
+      run: dotnet pack IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.sln -c Release --no-build --output .
 
     - name: Push
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
