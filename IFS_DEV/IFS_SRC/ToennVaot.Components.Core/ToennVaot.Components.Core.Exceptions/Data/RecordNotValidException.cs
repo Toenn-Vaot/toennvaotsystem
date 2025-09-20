@@ -9,7 +9,7 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        public RecordNotValidException(Enum value)
+        protected RecordNotValidException(Enum value)
         : base(value, $"The record of type {nameof(T)} is not valid")
         {
         }

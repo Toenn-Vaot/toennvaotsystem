@@ -4,12 +4,12 @@
 /// Exception triggers when the update of record is forbidden
 /// </summary>
 /// <typeparam name="T">The record type</typeparam>
-public class RecordUpdateForbiddenException<T> : BaseCoreException
+public abstract class RecordUpdateForbiddenException<T> : BaseCoreException
 {
     /// <summary>
     /// Constructor
     /// </summary>
-    public RecordUpdateForbiddenException(Enum value)
+    protected RecordUpdateForbiddenException(Enum value)
         : base(value, $"The record of type {nameof(T)} can't be updated")
     {
             

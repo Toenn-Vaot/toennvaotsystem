@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToennVaot.Components.Core.Exceptions\ToennVaot.Components.Core.Exceptions.csproj" />
+    <ProjectReference Include="..\ToennVaot.Components.Core.Models.Interfaces\ToennVaot.Components.Core.Models.Interfaces.csproj" />
     <ProjectReference Include="..\ToennVaot.Components.Core.Models\ToennVaot.Components.Core.Models.csproj" />
   </ItemGroup>
 

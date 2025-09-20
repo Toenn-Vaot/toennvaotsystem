@@ -9,7 +9,7 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        public RecordNotExistsException(Enum value)
+        protected RecordNotExistsException(Enum value)
         : base(value, $"The record of type {nameof(T)} does not exists")
         {
         }

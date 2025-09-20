@@ -9,7 +9,7 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        public RecordAlreadyExistsException(Enum value)
+        protected RecordAlreadyExistsException(Enum value)
         : base(value, $"The record of type {nameof(T)} already exists")
         {
         }

@@ -4,7 +4,7 @@
     /// This class describes the base CORE exception.
     /// This class should be used as base for CORE component exceptions
     /// </summary>
-    public abstract class BaseCoreException : BaseComponentException
+    public abstract class BaseCoreException : BaseComponentException<ComponentSubSystemEnum>
     {
         /// <inheritdoc />
         public override ComponentSubSystemEnum Component => ComponentSubSystemEnum.Core;

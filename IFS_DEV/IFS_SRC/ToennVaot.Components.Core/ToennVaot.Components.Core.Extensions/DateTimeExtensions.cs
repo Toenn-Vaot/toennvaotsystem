@@ -1,4 +1,6 @@
-﻿namespace ToennVaot.Components.Core.Extensions
+﻿using System.Globalization;
+
+namespace ToennVaot.Components.Core.Extensions
 {
     /// <summary>
     /// This class extends <see cref="DateTime"/>
@@ -32,7 +34,7 @@
 
             return dtNow.AddDays(-n + 6);
         }
-        
+
         /// <summary>  
         /// Indicates whether this date is in leap year.  
         /// </summary>  
@@ -53,12 +55,15 @@
         public static int CalculateAgeInYears(this DateTime date, DateTime? baseComparisonDate = null)
         {
             baseComparisonDate ??= DateTime.Now.Date;
-            if (date > baseComparisonDate) throw new ArgumentOutOfRangeException(nameof(date), "Should be less or equal from present date.");
+            if (date > baseComparisonDate)
+                throw new ArgumentOutOfRangeException(nameof(date), "Should be less or equal from present date.");
 
             const byte feb28 = 59;
             // indicates whether date year has extra day compare to present date.  
             // Note, leap years have 366 days vs to 365 for regular years.  
-            var extraDay = date.IsInLeapYear() && !baseComparisonDate.Value.IsInLeapYear() && date.DayOfYear > feb28 ? 1 : 0;
+            var extraDay = date.IsInLeapYear() && !baseComparisonDate.Value.IsInLeapYear() && date.DayOfYear > feb28
+                ? 1
+                : 0;
 
             // indicates whether date has been celebrated in the present year.  
             var hasDobOccur = baseComparisonDate.Value.DayOfYear >= date.DayOfYear - extraDay;
@@ -66,7 +71,7 @@
             // calculate the years of age  
             return baseComparisonDate.Value.Year - date.Year - (hasDobOccur ? 0 : 1);
         }
-        
+
         /// <summary>
         /// Force the Date kind as Local
         /// </summary>
@@ -127,21 +132,55 @@
             return date.HasValue ? ResetTimePart(date.Value) : null;
         }
 
+        #region French events
+
         /// <summary>
-        /// Function returns the Easter date of the year
+        /// Get the French event date of the <paramref name="value"/>
         /// </summary>
-        /// <returns>Easter DateTime of the year</returns>
-        public static DateTime DateOfEaster()
+        /// <param name="value">The <see cref="DateTime"/> instance</param>
+        /// <param name="e">The french event to get date</param>
+        /// <returns>The date</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the <paramref name="e"/> is out of range</exception>
+        public static DateTime GetFrenchEventDate(this DateTime value, FrenchEventEnum e)
         {
-            return DateOfEaster(DateTime.Now);
+            var year = value.Year;
+            return e switch
+            {
+                FrenchEventEnum.NewYearDay => new DateTime(year, 1, 1),
+                FrenchEventEnum.LaborDay => new DateTime(year, 5, 1),
+                FrenchEventEnum.ArmisticeDay1945 => new DateTime(year, 5, 8),
+                FrenchEventEnum.July14 => new DateTime(year, 7, 14),
+                _ => throw new ArgumentOutOfRangeException(nameof(e))
+            };
         }
+
+        /// <summary>
+        /// Indicates whether the <paramref name="value"/> is a French event date
+        /// </summary>
+        /// <param name="value">This <see cref="DateTime"/> instance.</param> 
+        /// <returns>The french event if found. Otherwise, null</returns>
+        public static FrenchEventEnum? IsFrenchEventDate(this DateTime value)
+        {
+            foreach (FrenchEventEnum e in Enum.GetValues(typeof(FrenchEventEnum)))
+            {
+                if (value.Date == GetFrenchEventDate(value, e).Date)
+                {
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Christian events
 
         /// <summary>
         /// Function returns the Easter date of the <paramref name="value"/>'s year
         /// </summary>
         /// <param name="value">This <see cref="DateTime"/> instance.</param> 
         /// <returns>Easter date of the <paramref name="value"/>'s year</returns>
-        public static DateTime DateOfEaster(this DateTime value)
+        private static DateTime DateOfEaster(this DateTime value)
         {
             var year = value.Year;
 
@@ -163,224 +202,152 @@
         }
 
         /// <summary>
-        /// Get the New Year date of the <paramref name="value"/>
+        /// Get the Christian event date of the <paramref name="value"/>
         /// </summary>
         /// <param name="value">The <see cref="DateTime"/> instance</param>
+        /// <param name="e">The christian event to get date</param>
         /// <returns>The date</returns>
-        public static DateTime New_Year_Day(this DateTime value)
+        public static DateTime GetChristianEventDate(this DateTime value, ChristianEventEnum e)
         {
-            return new DateTime(value.Year, 1, 1);
+            var year = value.Year;
+            switch (e)
+            {
+                case ChristianEventEnum.MaryMotherOfGod:
+                    return new DateTime(value.Year, 1, 1);
+                case ChristianEventEnum.Epiphany:
+                    return new DateTime(value.Year, 1, 6);
+                case ChristianEventEnum.Presentation:
+                    return new DateTime(value.Year, 2, 2);
+                case ChristianEventEnum.AshWednesday:
+                    return DateOfEaster(value).AddDays(-46);
+                case ChristianEventEnum.PalmSunday:
+                    return DateOfEaster(value).AddDays(-7);
+                case ChristianEventEnum.HolyThursday:
+                    return DateOfEaster(value).AddDays(-3);
+                case ChristianEventEnum.SaintFriday:
+                    return DateOfEaster(value).AddDays(-2);
+                case ChristianEventEnum.Easter:
+                    return DateOfEaster(value);
+                case ChristianEventEnum.EasterMonday:
+                    return DateOfEaster(value).AddDays(1);
+                case ChristianEventEnum.AscensionDay:
+                    return DateOfEaster(value).AddDays(39);
+                case ChristianEventEnum.Pentecost:
+                    return DateOfEaster(value).AddDays(49);
+                case ChristianEventEnum.Assumption:
+                    return new DateTime(value.Year, 8, 15);
+                case ChristianEventEnum.AllSaints:
+                    return new DateTime(value.Year, 11, 1);
+                case ChristianEventEnum.AllSouls:
+                    return new DateTime(value.Year, 11, 2);
+                case ChristianEventEnum.ImmaculateConception:
+                    return new DateTime(value.Year, 12, 8);
+                case ChristianEventEnum.ChristmasDay:
+                    return new DateTime(value.Year, 12, 25);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(e));
+            }
         }
 
         /// <summary>
-        /// Get the Work party date of the <paramref name="value"/>
+        /// Indicates whether the <paramref name="value"/> is a Christian event date
         /// </summary>
         /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Work_Party(this DateTime value)
+        /// <returns>The christian event if found. Otherwise, null</returns>
+        public static ChristianEventEnum? IsChristianEventDate(this DateTime value)
         {
-            return new DateTime(value.Year, 5, 1);
-        }
-        
-
-        /// <summary>
-        /// Get the World War II Armistice date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Armistice_Day_1945(this DateTime value)
-        {
-            return new DateTime(value.Year, 5, 8);
+            foreach (ChristianEventEnum e in Enum.GetValues(typeof(ChristianEventEnum)))
+            {
+                if (value.Date == GetChristianEventDate(value, e).Date)
+                {
+                    return e;
+                }
+            }
+            return null;
         }
 
-        /// <summary>
-        /// Get the National French independence date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime July_14(this DateTime value)
-        {
-            return new DateTime(value.Year, 7, 14);
-        }
-        
-        /// <summary>
-        /// Get the Assumption date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Assumption(this DateTime value)
-        {
-            return new DateTime(value.Year, 8, 15);
-        }
-        
-        /// <summary>
-        /// Get the Saints date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Saints_Day(this DateTime value)
-        {
-            return new DateTime(value.Year, 11, 1);
-        }
+        #endregion
+
+        #region Muslim events
+
+        private static readonly (MuslimEventEnum value, HijriMonthsEnum month, int day)[] MuslimEvents = [
+            (MuslimEventEnum.NewEve, HijriMonthsEnum.Muharram, 1),
+            (MuslimEventEnum.Achoura, HijriMonthsEnum.Muharram, 10),
+            (MuslimEventEnum.Mawlid, HijriMonthsEnum.RabiAwwal, 12),
+            (MuslimEventEnum.IsraMiRaj, HijriMonthsEnum.Rajab, 27),
+            (MuslimEventEnum.MiChaaban, HijriMonthsEnum.Shaaban, 15),
+            (MuslimEventEnum.RamadanStart, HijriMonthsEnum.Ramadan, 1),
+            (MuslimEventEnum.LaylatAlQadr, HijriMonthsEnum.Ramadan, 27),
+            (MuslimEventEnum.AidAlFitr, HijriMonthsEnum.Shawwal, 1),
+            (MuslimEventEnum.ArafatDay, HijriMonthsEnum.DhuAlHijjah, 9),
+            (MuslimEventEnum.AidAlAdha, HijriMonthsEnum.DhuAlHijjah, 10)
+        ];
 
         /// <summary>
-        /// Get the Christmas date of the <paramref name="value"/>
+        /// Get the Muslim event date of the <paramref name="value"/>
         /// </summary>
         /// <param name="value">The <see cref="DateTime"/> instance</param>
+        /// <param name="e">The muslim event to get date</param>
         /// <returns>The date</returns>
-        public static DateTime Christmas_Day(this DateTime value)
+        public static DateTime GetMuslimEventDate(this DateTime value, MuslimEventEnum e)
         {
-            return new DateTime(value.Year, 12, 25);
-        }
+            var calendar = new UmAlQuraCalendar();
+            var year = value.Year;
 
-        /// <summary>
-        /// Get the Saint Friday date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Saint_Friday(this DateTime value)
-        {
-            return DateOfEaster(value).AddDays(-2);
-        }
-        
-        /// <summary>
-        /// Get the Easter Monday date of the <paramref name="value"/>
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Easter_Monday(this DateTime value)
-        {
-            return DateOfEaster(value).AddDays(1);
+            var hijriStartYear = calendar.GetYear(new DateTime(year, 1, 1));
+            var hijriEndYear = calendar.GetYear(new DateTime(year, 12, 31));
+
+            var eventDatePart = MuslimEvents.First(x => x.value == e);
+            for (var hy = hijriStartYear; hy <= hijriEndYear; hy++)
+            {
+                if (TryHijriToGregorian(hy, eventDatePart.month, eventDatePart.day, out var result) && result.Year == year)
+                {
+                    return result;
+                }
+            }
+
+            return default;
         }
 
         /// <summary>
-        /// Get the Ascension date of the <paramref name="value"/>
+        /// Indicates whether the <paramref name="value"/> is a Muslim event date
         /// </summary>
         /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Ascension_Day(this DateTime value)
+        /// <returns>The muslim event if found. Otherwise, null</returns>
+        public static MuslimEventEnum? IsMuslimEventDate(this DateTime value)
         {
-            return DateOfEaster(value).AddDays(39);
+            foreach (var e in MuslimEvents)
+            {
+                if (value.Date == GetMuslimEventDate(value, e.value).Date)
+                {
+                    return e.value;
+                }
+            }
+            return null;
         }
 
         /// <summary>
-        /// Get the Pentecost date of the <paramref name="value"/>
+        /// Convert a Hijri date to Gregorian date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>The date</returns>
-        public static DateTime Pentecost(this DateTime value)
+        /// <param name="hijriYear">The Hijri year</param>
+        /// <param name="hijriMonth">The Hijri month</param>
+        /// <param name="hijriDay">The Hijri day</param>
+        /// <param name="gregorianDate">The output gregorian date</param>
+        /// <returns>True if succeed. Otherwise, false</returns>
+        private static bool TryHijriToGregorian(int hijriYear, HijriMonthsEnum hijriMonth, int hijriDay, out DateTime gregorianDate)
         {
-            return DateOfEaster(value).AddDays(50);
+            try
+            {
+                gregorianDate = new UmAlQuraCalendar().ToDateTime(hijriYear, (int)hijriMonth, hijriDay, 0, 0, 0, 0);
+                return true;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                gregorianDate = default;
+                return false;
+            }
         }
 
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is New Year date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsNew_Year_Day(this DateTime value)
-        {
-            return value.CompareTo(value.New_Year_Day()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Work Party date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsWork_Party(this DateTime value)
-        {
-            return value.CompareTo(value.Work_Party()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is World War II Armistice date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsArmistice_Day_1945(this DateTime value)
-        {
-            return value.CompareTo(value.Armistice_Day_1945()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is National French independence date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsJuly_14(this DateTime value)
-        {
-            return value.CompareTo(value.July_14()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Assumption date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsAssumption(this DateTime value)
-        {
-            return value.CompareTo(value.Assumption()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Saints date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsSaints_Day(this DateTime value)
-        {
-            return value.CompareTo(value.Saints_Day()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Chrsitmas date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsChristmas_Day(this DateTime value)
-        {
-            return value.CompareTo(value.Christmas_Day()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Saint Friday date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsSaint_Friday(this DateTime value)
-        {
-            return value.CompareTo(value.Saint_Friday()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Easter Monday date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsEaster_Monday(this DateTime value)
-        {
-            return value.CompareTo(value.Easter_Monday()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Ascension date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsAscension_Day(this DateTime value)
-        {
-            return value.CompareTo(value.Ascension_Day()) == 0;
-        }
-        
-        /// <summary>
-        /// Indicates if the <paramref name="value"/> is Pentecost date
-        /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
-        /// <returns>True. Otherwise, false</returns>
-        public static bool IsPentecost(this DateTime value)
-        {
-            return value.CompareTo(value.Pentecost()) == 0;
-        }
+        #endregion
     }
 }

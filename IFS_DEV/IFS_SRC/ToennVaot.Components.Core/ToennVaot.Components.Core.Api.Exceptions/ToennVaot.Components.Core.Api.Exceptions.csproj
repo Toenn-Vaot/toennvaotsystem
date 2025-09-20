@@ -6,4 +6,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ToennVaot.Components.Core.Exceptions\ToennVaot.Components.Core.Exceptions.csproj" />
+  </ItemGroup>
 </Project>

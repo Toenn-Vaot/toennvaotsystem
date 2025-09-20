@@ -6,12 +6,12 @@ namespace ToennVaot.Components.Core.Exceptions
     /// This class describes the base component exception.
     /// This class should be used as base for all components of sub-system
     /// </summary>
-    public abstract class BaseComponentException : Exception
+    public abstract class BaseComponentException<T> : Exception where T : Enum
     {
         /// <summary>
         /// The linked component
         /// </summary>
-        public abstract ComponentSubSystemEnum Component { get; }
+        public abstract T Component { get; }
 
         /// <summary>
         /// The exception code value
@@ -47,7 +47,7 @@ namespace ToennVaot.Components.Core.Exceptions
         /// <inheritdoc />
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(new { component = (int)Component, code = ExceptionCode, message = Message });
+            return JsonConvert.SerializeObject(new { component = int.Parse(Component.ToString()), code = ExceptionCode, message = Message });
         }
     }
 }

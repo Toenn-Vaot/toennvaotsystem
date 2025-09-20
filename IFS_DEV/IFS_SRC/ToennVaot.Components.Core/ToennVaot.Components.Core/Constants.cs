@@ -1,8 +1,4 @@
-﻿using CsvHelper;
-using System.Globalization;
-using System.Text;
-
-namespace ToennVaot.Components.Core
+﻿namespace ToennVaot.Components.Core
 {
     /// <summary>
     /// The Extensions constants
