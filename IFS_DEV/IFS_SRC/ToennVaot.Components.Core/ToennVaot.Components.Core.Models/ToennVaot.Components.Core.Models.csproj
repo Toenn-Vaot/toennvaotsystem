@@ -2,6 +2,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">True</GeneratePackageOnBuild>
     <Title>ToennVaot Components Core Models</Title>
+    <Description>This package is to add models for projects.</Description>
     <RepositoryUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
@@ -24,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.13" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="JetBrains.Annotations" Version="2025.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
   <ItemGroup>

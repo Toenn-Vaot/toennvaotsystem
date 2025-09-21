@@ -2,13 +2,14 @@
   <PropertyGroup>
     <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">True</GeneratePackageOnBuild>
     <Title>ToennVaot Components Core Security</Title>
+    <Description>This package is to present security tooling, models for projects.</Description>
     <RepositoryUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="9.0.9" />
   </ItemGroup>
 
 </Project>

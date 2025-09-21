@@ -3,6 +3,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">True</GeneratePackageOnBuild>
     <Title>ToennVaot Components Core Model Interfaces</Title>
+    <Description>This package is to present model interfaces for projects.</Description>
     <RepositoryUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/Toenn-Vaot/ToennVaot.Components.Core</PackageProjectUrl>
