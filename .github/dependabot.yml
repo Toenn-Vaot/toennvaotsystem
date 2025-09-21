@@ -6,6 +6,18 @@
 version: 2
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
-    directories: "**/ToennVaot.Component.Core*" # Location of package manifests
+    directories: 
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Api
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Api.Exceptions
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Api.Extensions
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Api.Interfaces
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Api.Models
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Exceptions
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Extensions
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Interfaces
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Models
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Models.Interfaces
+      - /IFS_DEV/IFS_SRC/ToennVaot.Components.Core/ToennVaot.Components.Core.Security
     schedule:
       interval: "weekly"
