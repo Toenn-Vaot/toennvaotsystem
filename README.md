@@ -1,9 +1,11 @@
 [![Build and Test](https://github.com/Toenn-Vaot/toennvaotsystem/actions/workflows/dotnet-build-test.yml/badge.svg)](https://github.com/Toenn-Vaot/toennvaotsystem/actions/workflows/dotnet-build-test.yml)
+[![Release to NuGet](https://github.com/Toenn-Vaot/toennvaotsystem/actions/workflows/release-to-nuget.yml/badge.svg)](https://github.com/Toenn-Vaot/toennvaotsystem/actions/workflows/release-to-nuget.yml)
 
 # TOENN VAOT System
 
 ## ToennVaot.Components.Core
 ![NuGet Version](https://img.shields.io/nuget/v/ToennVaot.Components.Core)
+
 
 ```
 dotnet add package ToennVaot.Components.Core --version 1.0.0
