@@ -7,7 +7,10 @@ namespace ToennVaot.Components.Core.Interfaces;
 /// <summary>
 /// Interface defines the based store methods with model
 /// </summary>
-public interface IStoreChangedState<T, TState, TUser> : IStore 
+/// <typeparam name="T">The item type to delete</typeparam>
+/// <typeparam name="TState">The enumeration of states to apply</typeparam>
+/// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
+public interface IStoreChangedState<in T, in TState, in TUser> : IStore 
     where T : IStateRecord<TState>
     where TState : Enum
 {

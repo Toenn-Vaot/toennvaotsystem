@@ -6,7 +6,9 @@ namespace ToennVaot.Components.Core.Interfaces;
 /// <summary>
 /// Interface defines the based store methods with model
 /// </summary>
-public interface IStoreDeletable<T, TUser> : IStore 
+/// <typeparam name="T">The item type to delete</typeparam>
+/// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
+public interface IStoreDeletable<in T, in TUser> : IStore 
     where T : IDeletableRecord<TUser>
 {
     /// <summary>

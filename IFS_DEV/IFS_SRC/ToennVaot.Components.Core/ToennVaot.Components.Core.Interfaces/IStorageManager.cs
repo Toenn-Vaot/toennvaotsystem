@@ -29,7 +29,7 @@ namespace ToennVaot.Components.Core.Interfaces
     /// Defines the storage manager interface with a database context
     /// </summary>
     /// <typeparam name="T">The database context</typeparam>
-    public interface IStorageManager<T>
+    public interface IStorageManager<out T>
         where T : DbContext, new()
     {
         /// <summary>

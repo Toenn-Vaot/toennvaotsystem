@@ -13,7 +13,10 @@ namespace ToennVaot.Components.Core.Interfaces
     /// <summary>
     /// Interface defines the based manager methods to manage items
     /// </summary>
-    public interface IManager<T, in TKey, TUser> : IManager 
+    /// <typeparam name="T">The item type to delete</typeparam>
+    /// <typeparam name="TKey">The type of the item key</typeparam>
+    /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
+    public interface IManager<T, in TKey, in TUser> : IManager 
         where T : class, new()
     {
         /// <summary>
