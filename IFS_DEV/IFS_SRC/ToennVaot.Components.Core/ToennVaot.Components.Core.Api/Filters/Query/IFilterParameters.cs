@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
-using ToennVaot.Components.Core.Models;
+using ToennVaot.Components.Core.Models.Enumerations;
 
 namespace ToennVaot.Components.Core.Api.Filters.Query
 {

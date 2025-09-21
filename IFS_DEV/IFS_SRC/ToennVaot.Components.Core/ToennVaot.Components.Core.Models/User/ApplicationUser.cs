@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using ToennVaot.Components.Core.Models.Enumerations;
 
 namespace ToennVaot.Components.Core.Models.User
 {

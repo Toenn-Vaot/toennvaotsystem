@@ -1,4 +1,4 @@
-﻿namespace ToennVaot.Components.Core.Models
+﻿namespace ToennVaot.Components.Core.Models.Enumerations
 {
     /// <summary>
     /// This enumeration lists all sort directions

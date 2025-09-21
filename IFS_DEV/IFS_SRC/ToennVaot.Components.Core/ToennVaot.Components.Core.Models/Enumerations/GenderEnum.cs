@@ -1,4 +1,4 @@
-﻿namespace ToennVaot.Components.Core.Models
+﻿namespace ToennVaot.Components.Core.Models.Enumerations
 {
     /// <summary>
     /// Enumeration lists of the available gender values

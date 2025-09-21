@@ -1,4 +1,4 @@
-﻿namespace ToennVaot.Components.Core.Extensions;
+﻿namespace ToennVaot.Components.Core.Models.Enumerations;
 
 /// <summary>
 /// The enumeration lists all the Hijri months

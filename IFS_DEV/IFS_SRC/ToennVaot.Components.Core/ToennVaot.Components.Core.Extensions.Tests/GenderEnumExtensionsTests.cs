@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using ToennVaot.Components.Core.Models;
+using ToennVaot.Components.Core.Models.Enumerations;
 using Assert = NUnit.Framework.Assert;
 
 namespace ToennVaot.Components.Core.Extensions.Tests;

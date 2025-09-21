@@ -1,4 +1,4 @@
-﻿using ToennVaot.Components.Core.Models;
+﻿using ToennVaot.Components.Core.Models.Enumerations;
 
 namespace ToennVaot.Components.Core.Extensions
 {
