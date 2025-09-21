@@ -20,14 +20,14 @@ namespace ToennVaot.Components.Core.Interfaces
         /// Gets all items
         /// </summary>
         /// <returns>The collection of items</returns>
-        Task<ManagerRequestResult<IEnumerable<T>>> GetAll();
+        Task<ManagerRequestResult<IEnumerable<T>>> GetAllAsync();
 
         /// <summary>
         /// Gets an item by its identifier
         /// </summary>
         /// <param name="id">The identifier</param>
         /// <returns>The item found or null</returns>
-        Task<ManagerRequestResult<T>> GetById(TKey id);
+        Task<ManagerRequestResult<T>> GetByIdAsync(TKey id);
 
         /// <summary>
         /// Creates an item
@@ -35,7 +35,7 @@ namespace ToennVaot.Components.Core.Interfaces
         /// <param name="item">The item to create</param>
         /// <param name="user">The user makes the operation</param>
         /// <returns>True if succeed. Otherwise, false</returns>
-        Task<ManagerRequestResult<bool>> Create(T item, TUser user);
+        Task<ManagerRequestResult<bool>> CreateAsync(T item, TUser user);
 
         /// <summary>
         /// Updates an item
@@ -43,6 +43,6 @@ namespace ToennVaot.Components.Core.Interfaces
         /// <param name="item">The item to update</param>
         /// <param name="user">The user makes the operation</param>
         /// <returns>True if succeed. Otherwise, false</returns>
-        Task<ManagerRequestResult<bool>> Update(T item, TUser user);
+        Task<ManagerRequestResult<bool>> UpdateAsync(T item, TUser user);
     }
 }

@@ -17,7 +17,7 @@ public interface IStoreChangedState<T, TState, TUser> : IStore
     /// <param name="item">The item to init state</param>
     /// <param name="user">The user makes the operation</param>
     /// <returns>The request result</returns>
-    Task<StoreRequestResult> InitState(T item, TUser user);
+    Task<StoreRequestResult> InitStateAsync(T item, TUser user);
 
     /// <summary>
     /// Change the state of the item to the store
@@ -30,7 +30,7 @@ public interface IStoreChangedState<T, TState, TUser> : IStore
     ///     Exception triggers when <paramref name="newState" /> is out of the authorized
     ///     flow
     /// </exception>
-    Task<StoreRequestResult> ChangeState(T item, TState newState, TUser user);
+    Task<StoreRequestResult> ChangeStateAsync(T item, TState newState, TUser user);
 
     /// <summary>
     /// Reset the state of the item to the store
@@ -38,5 +38,5 @@ public interface IStoreChangedState<T, TState, TUser> : IStore
     /// <param name="item">The item to reset state</param>
     /// <param name="user">The user makes the operation</param>
     /// <returns>The request result</returns>
-    Task<StoreRequestResult> ResetState(T item, TUser user);
+    Task<StoreRequestResult> ResetStateAsync(T item, TUser user);
 }

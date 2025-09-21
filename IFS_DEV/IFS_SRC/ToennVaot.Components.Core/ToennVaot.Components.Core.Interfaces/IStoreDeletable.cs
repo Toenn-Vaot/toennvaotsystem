@@ -15,5 +15,5 @@ public interface IStoreDeletable<T, TUser> : IStore
     /// <param name="item">The item to delete</param>
     /// <param name="user">The user makes the operation</param>
     /// <returns>The request result</returns>
-    Task<StoreRequestResult> Delete(T item, TUser user);
+    Task<StoreRequestResult> DeleteAsync(T item, TUser user);
 }
