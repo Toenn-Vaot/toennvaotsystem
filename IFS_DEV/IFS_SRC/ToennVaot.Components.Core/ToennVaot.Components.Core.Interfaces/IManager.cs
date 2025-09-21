@@ -34,15 +34,15 @@ namespace ToennVaot.Components.Core.Interfaces
         /// </summary>
         /// <param name="item">The item to create</param>
         /// <param name="user">The user makes the operation</param>
-        /// <returns>True if succeed. Otherwise, false</returns>
-        Task<ManagerRequestResult<bool>> CreateAsync(T item, TUser user);
+        /// <returns>True if succeeded. Otherwise, false</returns>
+        Task<ManagerRequestResult> CreateAsync(T item, TUser user);
 
         /// <summary>
         /// Updates an item
         /// </summary>
         /// <param name="item">The item to update</param>
         /// <param name="user">The user makes the operation</param>
-        /// <returns>True if succeed. Otherwise, false</returns>
-        Task<ManagerRequestResult<bool>> UpdateAsync(T item, TUser user);
+        /// <returns>True if succeeded. Otherwise, false</returns>
+        Task<ManagerRequestResult> UpdateAsync(T item, TUser user);
     }
 }

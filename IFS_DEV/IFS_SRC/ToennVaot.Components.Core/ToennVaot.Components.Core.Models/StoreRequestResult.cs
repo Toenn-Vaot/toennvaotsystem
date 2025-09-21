@@ -10,9 +10,33 @@
         /// Constructor
         /// </summary>
         /// <param name="result">The result flag</param>
-        public StoreRequestResult(bool result)
+        private StoreRequestResult(bool result)
         {
             Result = result;
+        }
+
+        /// <summary>
+        /// Returns an <see cref="StoreRequestResult"/> indicating a successful operation.
+        /// </summary>
+        /// <returns>An <see cref="StoreRequestResult"/> indicating a success operation</returns>
+        public static StoreRequestResult Succeed()
+        {
+            return new StoreRequestResult(true) { Succeeded = true };
+        }
+
+        /// <summary>
+        /// Creates an <see cref="StoreRequestResult"/> indicating a failed operation, with a list of <paramref name="exceptions"/> if applicable.
+        /// </summary>
+        /// <param name="exceptions">An optional array of <see cref="Exception"/>s which caused the operation to fail.</param>
+        /// <returns>An <see cref="StoreRequestResult"/> indicating a failed operation, with a list of <paramref name="exceptions"/> if applicable.</returns>
+        public static StoreRequestResult Failed(params Exception[] exceptions)
+        {
+            var item = new StoreRequestResult(false) { Succeeded = false };
+            if (exceptions != null)
+            {
+                item.Exceptions.AddRange(exceptions);
+            }
+            return item;
         }
     }
 

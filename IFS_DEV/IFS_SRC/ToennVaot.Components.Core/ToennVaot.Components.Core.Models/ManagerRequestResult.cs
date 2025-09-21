@@ -10,9 +10,33 @@
         /// Constructor
         /// </summary>
         /// <param name="result">The result flag</param>
-        public ManagerRequestResult(bool result)
+        private ManagerRequestResult(bool result)
         {
             Result = result;
+        }
+
+        /// <summary>
+        /// Returns an <see cref="ManagerRequestResult"/> indicating a successful operation.
+        /// </summary>
+        /// <returns>An <see cref="ManagerRequestResult"/> indicating a success operation</returns>
+        public static ManagerRequestResult Succeed()
+        {
+            return new ManagerRequestResult(true) { Succeeded = true };
+        }
+
+        /// <summary>
+        /// Creates an <see cref="ManagerRequestResult"/> indicating a failed operation, with a list of <paramref name="exceptions"/> if applicable.
+        /// </summary>
+        /// <param name="exceptions">An optional array of <see cref="Exception"/>s which caused the operation to fail.</param>
+        /// <returns>An <see cref="ManagerRequestResult"/> indicating a failed operation, with a list of <paramref name="exceptions"/> if applicable.</returns>
+        public static ManagerRequestResult Failed(params Exception[] exceptions)
+        {
+            var item = new ManagerRequestResult(false) { Succeeded = false };
+            if (exceptions != null)
+            {
+                item.Exceptions.AddRange(exceptions);
+            }
+            return item;
         }
     }
 
