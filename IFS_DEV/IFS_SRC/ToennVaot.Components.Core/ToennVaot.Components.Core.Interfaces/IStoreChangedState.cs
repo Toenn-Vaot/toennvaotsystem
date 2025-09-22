@@ -11,8 +11,8 @@ namespace ToennVaot.Components.Core.Interfaces;
 /// <typeparam name="TState">The enumeration of states to apply</typeparam>
 /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
 public interface IStoreChangedState<in T, in TState, in TUser> : IStore 
-    where T : IStateRecord<TState>
-    where TState : Enum
+    where T : IStateRecord<TState, TUser>
+    where TState : struct, Enum
 {
     /// <summary>
     /// Initiate the state of the item to the store

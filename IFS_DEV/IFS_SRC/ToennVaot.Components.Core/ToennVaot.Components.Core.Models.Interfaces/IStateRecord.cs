@@ -3,12 +3,15 @@
 /// <summary>
 /// Interface defines a state record
 /// </summary>
-public interface IStateRecord<T>
+/// <typeparam name="TState">The enumeration of states to apply</typeparam>
+/// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
+public interface IStateRecord<TState, TUser>
+    where TState : struct, Enum
 {
     /// <summary>
     /// The status identifier
     /// </summary>
-    public T StatusId { get; set; }
+    public TState Status { get; set; }
 
     /// <summary>
     /// The date and time when the status was last changed
@@ -18,5 +21,5 @@ public interface IStateRecord<T>
     /// <summary>
     /// The user who last changed the status
     /// </summary>
-    public string StateChangedBy { get; set; }
+    public TUser StateChangedBy { get; set; }
 }
