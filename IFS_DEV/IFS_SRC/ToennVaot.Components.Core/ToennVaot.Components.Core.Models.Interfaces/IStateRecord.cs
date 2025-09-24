@@ -5,6 +5,10 @@
 /// </summary>
 public interface IStateRecord
 {
+    /// <summary>
+    /// The status identifier
+    /// </summary>
+    public int StatusId { get; set; }
 }
 
 /// <summary>
