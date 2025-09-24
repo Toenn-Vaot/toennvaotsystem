@@ -1,10 +1,17 @@
 ﻿namespace ToennVaot.Components.Core.Models.Interfaces;
 
 /// <summary>
+/// The base interface for audited records
+/// </summary>
+public interface IAuditedRecord
+{
+}
+
+/// <summary>
 /// Interface defines an audited record
 /// </summary>
 /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
-public interface IAuditedRecord<TUser>
+public interface IAuditedRecord<TUser> : IAuditedRecord
 {
     /// <summary>
     /// The date and time when the record was created

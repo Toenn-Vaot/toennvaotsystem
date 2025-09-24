@@ -1,10 +1,17 @@
 ﻿namespace ToennVaot.Components.Core.Models.Interfaces;
 
 /// <summary>
+/// The base interface for deletable records
+/// </summary>
+public interface IDeletableRecord
+{
+}
+
+/// <summary>
 /// Interface defines a deletable record
 /// </summary>
 /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
-public interface IDeletableRecord<TUser>
+public interface IDeletableRecord<TUser> : IDeletableRecord
 {
     /// <summary>
     /// The date and time when the record was deleted

@@ -1,11 +1,18 @@
 ﻿namespace ToennVaot.Components.Core.Models.Interfaces;
 
 /// <summary>
+/// The base interface for state records
+/// </summary>
+public interface IStateRecord
+{
+}
+
+/// <summary>
 /// Interface defines a state record
 /// </summary>
 /// <typeparam name="TState">The enumeration of states to apply</typeparam>
 /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
-public interface IStateRecord<TState, TUser>
+public interface IStateRecord<TState, TUser> : IStateRecord
     where TState : struct, Enum
 {
     /// <summary>
