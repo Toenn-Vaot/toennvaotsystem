@@ -8,6 +8,14 @@
         /// <summary>
         /// Core
         /// </summary>
-        Core = 0
+        Core = 0,
+        /// <summary>
+        /// Api
+        /// </summary>
+        Api = 1,
+        /// <summary>
+        /// Web
+        /// </summary>
+        Web = 2,
     }
 }
