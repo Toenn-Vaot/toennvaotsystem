@@ -44,6 +44,6 @@
       <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico"/>
       <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.png" Pack="true" PackagePath="\"/>
       <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\LICENSE.txt" Pack="true" PackagePath="\"/>
-      <None Include="$([System.IO.Directory]::GetParent($(MSBuildProjectFullPath)).Name)\README.md" Pack="true" PackagePath="\"/>
+      <None Include="$([System.IO.Path]::GetDirectoryName($(MSBuildProjectFullPath)))\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
