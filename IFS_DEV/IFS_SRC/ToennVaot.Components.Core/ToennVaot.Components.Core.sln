@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Builds", "Builds", "{02EA68
 		..\..\..\README.md = ..\..\..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToennVaot.Components.Core.Web", "ToennVaot.Components.Core.Web\ToennVaot.Components.Core.Web.csproj", "{BBE68EC7-F225-4A8A-A37E-8A4DFA165A69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{58C6D69F-C765-4970-B52B-81B911A1AEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C6D69F-C765-4970-B52B-81B911A1AEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C6D69F-C765-4970-B52B-81B911A1AEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE68EC7-F225-4A8A-A37E-8A4DFA165A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE68EC7-F225-4A8A-A37E-8A4DFA165A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE68EC7-F225-4A8A-A37E-8A4DFA165A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE68EC7-F225-4A8A-A37E-8A4DFA165A69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
