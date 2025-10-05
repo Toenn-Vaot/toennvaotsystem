@@ -14,6 +14,7 @@
     <Description>Package for Toenn Vaot system</Description>
     <PackageOutputPath>$(MSBuildThisFileDirectory)IFS_GEN\nupkgs</PackageOutputPath>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>ToennVaot</PackageTags>
     <PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">Debug version generated $([System.DateTime]::Now.ToString("dd-MM-yyyy_hh:mm:ss")) on $(ComputerName) by $(UserName)</PackageReleaseNotes>
