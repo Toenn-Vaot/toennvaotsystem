@@ -1,23 +1,23 @@
-<Project>  
+<Project>
   <PropertyGroup>
-	<VersionSuffix Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">$([System.DateTime]::UtcNow.ToString(HHmmss))</VersionSuffix>
-	<Version Condition="'$(VersionSuffix)'!= ''">$(Version)</Version>
-	<Version Condition="'$(VersionSuffix)' == ''">$(Version)</Version>
+    <VersionSuffix Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">$([System.DateTime]::UtcNow.ToString(HHmmss))</VersionSuffix>
+    <Version Condition="'$(VersionSuffix)'!= ''">$(Version)</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">$(Version)</Version>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <Copyright>Copyright (C) 2025 Toenn Vaot Systems</Copyright>
     <Company>Toenn Vaot</Company>
     <Authors>Toenn Vaot</Authors>
-	<Deterministic>false</Deterministic>
+    <Deterministic>false</Deterministic>
     <TargetFramework>net8.0</TargetFramework>
-	<Description>Package for Toenn Vaot system</Description>
+    <Description>Package for Toenn Vaot system</Description>
     <PackageOutputPath>$(MSBuildThisFileDirectory)IFS_GEN\nupkgs</PackageOutputPath>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>ToennVaot</PackageTags>
-	<PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">Debug version generated $([System.DateTime]::Now.ToString("dd-MM-yyyy_hh:mm:ss")) on $(ComputerName) by $(UserName)</PackageReleaseNotes>
-	<PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">Released $([System.DateTime]::Now.ToString("dd-MM-yyyy"))</PackageReleaseNotes>
+    <PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">Debug version generated $([System.DateTime]::Now.ToString("dd-MM-yyyy_hh:mm:ss")) on $(ComputerName) by $(UserName)</PackageReleaseNotes>
+    <PackageReleaseNotes Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">Released $([System.DateTime]::Now.ToString("dd-MM-yyyy"))</PackageReleaseNotes>
     <ApplicationIcon>$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -28,22 +28,22 @@
     <Nullable>disable</Nullable>
     <DocumentationFile>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)\$(MSBuildProjectName).xml</DocumentationFile>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	<IncludeSymbols>true</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <OutputPath>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>$(MSBuildThisFileDirectory)IFS_GEN\$(SolutionName)</OutputPath>
   </PropertyGroup>
-  
+
   <ItemGroup>
-      <None Include="$(MSBuildThisFileDirectory)Documentation\Development_Rules.pdf" PackagePath=""/>
-      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico"/>
-      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.png" Pack="true" PackagePath="\"/>
-      <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\LICENSE.txt" Pack="true" PackagePath="\"/>
-      <None Include="$([System.IO.Path]::GetDirectoryName($(MSBuildProjectFullPath)))\README.md" Pack="true" PackagePath="\"/>
+    <None Include="$(MSBuildThisFileDirectory)Documentation\Development_Rules.pdf"/>
+    <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.ico"/>
+    <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\Icons\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="$(MSBuildThisFileDirectory)IFS_INTEG\Packaging\Common\LICENSE.txt" Pack="true" PackagePath="\"/>
+    <None Include="$([System.IO.Path]::GetDirectoryName($(MSBuildProjectFullPath)))\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
