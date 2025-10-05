@@ -9,6 +9,58 @@ namespace ToennVaot.Components.Core.Extensions
     public static class DateTimeExtensions
     {
         /// <summary>
+        /// Get the elapsed years between current <paramref name="date"/> and <paramref name="compareDate"/>
+        /// </summary>
+        /// <param name="date">The current date</param>
+        /// <param name="compareDate">The date to compare with</param>
+        /// <returns>The elapsed years between dates</returns>
+        public static int ElapsedYears(this DateTime date, DateTime compareDate)
+        {
+            var start = date;
+            var end = compareDate;
+
+            if(start < end)
+                return compareDate.ElapsedYears(date);
+
+            return start.Year - end.Year - 1 + (start.Month > end.Month || (start.Month == end.Month && start.Day >= end.Day) ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Get the elapsed months between current <paramref name="date"/> and <paramref name="compareDate"/>
+        /// </summary>
+        /// <param name="date">The current date</param>
+        /// <param name="compareDate">The date to compare with</param>
+        /// <param name="excludeYears">Exclude months from elapsed years</param>
+        /// <returns>The elapsed months between dates</returns>
+        public static int ElapsedMonths(this DateTime date, DateTime compareDate, bool excludeYears = false)
+        {
+            var start = date;
+            var end = compareDate;
+
+            if(start < end)
+                return -ElapsedMonths(compareDate, date);
+
+            return start.Month - end.Month - (start.Day < end.Day ? 1 : 0) + (end.Year - start.Year) * 12;
+        }
+
+        /// <summary>
+        /// Get the elapsed months between current <paramref name="date"/> and <paramref name="compareDate"/>
+        /// </summary>
+        /// <param name="date">The current date</param>
+        /// <param name="compareDate">The date to compare with</param>
+        /// <param name="excludeYears">Exclude months from elapsed years</param>
+        /// <returns>The elapsed months between dates</returns>
+        public static double ElapsedDays(this DateTime date, DateTime compareDate, bool excludeYears = false)
+        {
+            if(!excludeYears)
+                return (compareDate - date).TotalDays;
+            
+            var zeroTime = new DateTime(1, 1, 1);
+            var span = compareDate - date;
+            return (zeroTime + span).Day - 1;
+        }
+
+        /// <summary>
         /// Get the first day of week of the <paramref name="value"/>
         /// </summary>
         /// <param name="value">This <see cref="DateTime"/> instance.</param>  

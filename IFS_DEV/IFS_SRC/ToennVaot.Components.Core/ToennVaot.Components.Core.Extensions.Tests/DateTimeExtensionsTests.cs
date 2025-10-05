@@ -18,6 +18,59 @@ namespace ToennVaot.Components.Core.Extensions.Tests
         }
 
         /// <summary>
+        /// Test <see cref="DateTimeExtensions.ElapsedYears"/>
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="compareDate"></param>
+        /// <param name="assertYears"></param>
+        [TestCase("2025-09-20", "2015-09-19", 10)]
+        [TestCase("2025-09-19", "2015-09-19", 10)]
+        [TestCase("2025-09-18", "2015-09-19", 9)]
+        [TestCase("2024-02-29", "2020-02-29", 4)]
+        [TestCase("2025-02-28", "2020-02-29", 4)]
+        [TestCase("2025-03-01", "2020-02-29", 5)]
+        [TestCase("2015-09-19", "2025-09-18", 9)]
+        [TestCase( "2020-02-29","2025-03-01", 5)]
+        [Category("DateTime_Basics")]
+        public void ElapsedYearsTest(DateTime date, DateTime compareDate, int assertYears)
+        {
+            var result = date.ElapsedYears(compareDate);
+            Assert.That(result == assertYears);
+        }
+
+        /// <summary>
+        /// Test <see cref="DateTimeExtensions.ElapsedMonths"/>
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="compareDate"></param>
+        /// <param name="assertMonths"></param>
+        [TestCase("2025-09-20", "2025-08-20", 1)]
+        [TestCase("2025-09-20", "2025-01-20", 8)]
+        [TestCase("2024-09-20", "2025-01-20", 20)]
+        [Category("DateTime_Basics")]
+        public void ElapsedMonthsTest(DateTime date, DateTime compareDate, int assertMonths)
+        {
+            var result = date.ElapsedMonths(compareDate);
+            Assert.That(result == assertMonths);
+        }
+
+        /// <summary>
+        /// Test <see cref="DateTimeExtensions.ElapsedDays"/>
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="compareDate"></param>
+        /// <param name="assertDays"></param>
+        [TestCase("2025-09-01", "2025-10-01", 30)]
+        [TestCase("2025-09-01", "2025-09-30", 29)]
+        [TestCase("2024-02-01", "2024-03-01", 29)]
+        [Category("DateTime_Basics")]
+        public void ElapsedDaysTest(DateTime date, DateTime compareDate, double assertDays)
+        {
+            var result = date.ElapsedDays(compareDate);
+            Assert.That(result.CompareTo(assertDays) == 0);
+        }
+
+        /// <summary>
         /// Test <see cref="DateTimeExtensions.FirstDayOfWeek"/>
         /// </summary>
         /// <param name="date"></param>
