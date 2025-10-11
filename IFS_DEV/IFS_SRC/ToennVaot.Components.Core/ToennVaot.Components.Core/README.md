@@ -1,4 +1,4 @@
-﻿# ToennVaot.Components.Core
+# ToennVaot.Components.Core
 
 Composant de base de l’écosystème **ToennVaot**.
 

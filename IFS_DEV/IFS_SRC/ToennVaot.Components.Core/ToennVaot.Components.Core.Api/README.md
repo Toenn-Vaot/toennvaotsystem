@@ -1,4 +1,4 @@
-﻿# ToennVaot.Components.Core.Api
+# ToennVaot.Components.Core.Api
 
 Infrastructure pour bâtir des **APIs REST** robustes et documentées.
 
