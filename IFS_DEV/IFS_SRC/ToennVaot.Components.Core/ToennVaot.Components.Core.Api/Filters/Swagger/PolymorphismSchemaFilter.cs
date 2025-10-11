@@ -10,7 +10,7 @@ namespace ToennVaot.Components.Core.Api.Filters.Swagger
     /// <typeparam name="T">The abstract/base class to integrate derivations</typeparam>
     public class PolymorphismSchemaFilter<T> : ISchemaFilter
     {
-        private readonly List<Type> _derivedTypes = new List<Type>(Init());
+        private readonly List<Type> _derivedTypes = [.. Init()];
         
         /// <inheritdoc />
         public void Apply(OpenApiSchema model, SchemaFilterContext context)

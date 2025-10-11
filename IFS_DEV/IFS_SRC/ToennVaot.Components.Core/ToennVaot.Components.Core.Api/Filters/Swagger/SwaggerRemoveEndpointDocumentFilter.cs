@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using ToennVaot.Components.Core.Api.Filters.Actions;
 
 namespace ToennVaot.Components.Core.Api.Filters.Swagger
 {
