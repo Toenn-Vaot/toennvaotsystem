@@ -16,7 +16,7 @@ namespace ToennVaot.Components.Core.Interfaces
     /// <typeparam name="T">The item type to delete</typeparam>
     /// <typeparam name="TKey">The type of the item key</typeparam>
     /// <typeparam name="TUser">The type to use to designate the user operating the actions</typeparam>
-    public interface IStore<T, in TKey, in TUser> : IStore
+    public interface IStore<T, TKey, in TUser> : IStore
         where T : class, new()
     {
         /// <summary>
@@ -38,7 +38,7 @@ namespace ToennVaot.Components.Core.Interfaces
         /// <param name="item">The item to add</param>
         /// <param name="user">The user makes the operation</param>
         /// <returns>The request result</returns>
-        Task<StoreRequestResult> CreateAsync(T item, TUser user);
+        Task<StoreRequestResult<TKey>> CreateAsync(T item, TUser user);
 
         /// <summary>
         /// Set a new item to the store
