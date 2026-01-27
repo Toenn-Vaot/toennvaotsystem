@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ToennVaot.Components.Core.Api.Filters.Swagger
@@ -13,7 +13,7 @@ namespace ToennVaot.Components.Core.Api.Filters.Swagger
         {
             if (operation.Parameters == null)
             {
-                operation.Parameters = new List<OpenApiParameter>();
+                operation.Parameters = new List<IOpenApiParameter>();
             }
 
             operation.Parameters.Add(new OpenApiParameter
@@ -24,7 +24,7 @@ namespace ToennVaot.Components.Core.Api.Filters.Swagger
                 Description = "The tenant identifier",
                 Schema = new OpenApiSchema
                 {
-                    Type = "string",
+                    Type = JsonSchemaType.String,
                     Format = "uuid"
                 }
             });

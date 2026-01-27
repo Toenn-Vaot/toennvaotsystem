@@ -1,5 +1,4 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ToennVaot.Components.Core.Api.Filters.Swagger
@@ -28,13 +27,6 @@ namespace ToennVaot.Components.Core.Api.Filters.Swagger
                 var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
 
                 parameter.Description ??= description.ModelMetadata?.Description;
-
-                if (parameter.Schema.Default == null && description.DefaultValue != null)
-                {
-                    parameter.Schema.Default = new OpenApiString(description.DefaultValue?.ToString());
-                }
-
-                parameter.Required |= description.IsRequired;
             }
         }
     }
