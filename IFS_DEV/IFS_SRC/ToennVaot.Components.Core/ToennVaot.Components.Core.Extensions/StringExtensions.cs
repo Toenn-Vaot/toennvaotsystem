@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 
 namespace ToennVaot.Components.Core.Extensions
@@ -8,12 +8,13 @@ namespace ToennVaot.Components.Core.Extensions
     /// </summary>
     public static class StringExtensions
     {
+        extension(string text)
+        {
         /// <summary>
         /// Get the <paramref name="text"/> without any diacritics
         /// </summary>
-        /// <param name="text">The string with diacritics to remove</param>
         /// <returns>The cleaned string</returns>
-        public static string RemoveDiacritics(this string text)
+        public string RemoveDiacritics()
         {
             if (string.IsNullOrWhiteSpace(text)) return text;
             text = text.Normalize(NormalizationForm.FormD);
@@ -25,13 +26,13 @@ namespace ToennVaot.Components.Core.Extensions
         /// <summary>
         /// Ellipse the <paramref name="text"/> with specified <paramref name="length"/>
         /// </summary>
-        /// <param name="text">The text to ellipse</param>
         /// <param name="length">The length determined the break and start of ellipsis</param>
         /// <returns>The <paramref name="text"/> with possible ellipsis</returns>
-        public static string Ellipsis(this string text, int length)
+        public string Ellipsis(int length)
         {
             if (string.IsNullOrWhiteSpace(text) || text.Length <= length) return text;
             return text[..length] + "...";
+        }
         }
     }
 }

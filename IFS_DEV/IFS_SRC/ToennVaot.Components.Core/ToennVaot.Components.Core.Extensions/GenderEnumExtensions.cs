@@ -1,4 +1,4 @@
-﻿using ToennVaot.Components.Core.Models.Enumerations;
+using ToennVaot.Components.Core.Models.Enumerations;
 
 namespace ToennVaot.Components.Core.Extensions
 {
@@ -7,12 +7,13 @@ namespace ToennVaot.Components.Core.Extensions
     /// </summary>
     public static class GenderEnumExtensions
     {
+        extension(GenderEnum value)
+        {
         /// <summary>
         /// Get the equivalent pronoun of the gender enumeration value
         /// </summary>
-        /// <param name="value">The enumeration value</param>
         /// <returns>The pronoun</returns>
-        public static string ToPronoun(this GenderEnum value)
+        public string ToPronoun()
         {
             return value switch
             {
@@ -22,6 +23,7 @@ namespace ToennVaot.Components.Core.Extensions
                 GenderEnum.Other => "They",
                 _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
             };
+        }
         }
     }
 }

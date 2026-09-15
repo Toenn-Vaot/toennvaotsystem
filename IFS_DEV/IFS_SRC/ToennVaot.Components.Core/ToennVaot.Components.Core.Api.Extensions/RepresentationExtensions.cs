@@ -1,4 +1,4 @@
-﻿using ToennVaot.Components.Core.Api.Models.Hal;
+using ToennVaot.Components.Core.Api.Models.Hal;
 
 namespace ToennVaot.Components.Core.Api.Extensions
 {
@@ -7,13 +7,14 @@ namespace ToennVaot.Components.Core.Api.Extensions
     /// </summary>
     public static class RepresentationExtensions
     {
+        extension(Representation item)
+        {
         /// <summary>
         /// Add the relation link "self"
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddSelfRelation(this Representation item, string url, HttpMethod method)
+        public void AddSelfRelation(string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddSelfRelation(new Link { Href = url, Method = method });
@@ -22,9 +23,8 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "self"
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
-        public static void AddSelfRelation(this Representation item, Link link)
+        public void AddSelfRelation(Link link)
         {
             item.AddRelation(link, "self");
         }
@@ -32,10 +32,9 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "search"
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddSearchRelation(this Representation item, string url, HttpMethod method)
+        public void AddSearchRelation(string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddSearchRelation(new Link { Href = url, Method = method });
@@ -44,9 +43,8 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "search"
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
-        public static void AddSearchRelation(this Representation item, Link link)
+        public void AddSearchRelation(Link link)
         {
             item.AddRelation(link, "search");
         }
@@ -54,10 +52,9 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "first" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddFirstRelation(this Representation item, string url, HttpMethod method)
+        public void AddFirstRelation(string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddFirstRelation(new Link { Href = url, Method = method });
@@ -66,9 +63,8 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "first" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
-        public static void AddFirstRelation(this Representation item, Link link)
+        public void AddFirstRelation(Link link)
         {
             item.AddRelation(link, "first");
         }
@@ -76,10 +72,9 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "previous" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddPreviousRelation(this Representation item, string url, HttpMethod method)
+        public void AddPreviousRelation(string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddPreviousRelation(new Link { Href = url, Method = method });
@@ -88,9 +83,8 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "previous" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
-        public static void AddPreviousRelation(this Representation item, Link link)
+        public void AddPreviousRelation(Link link)
         {
             item.AddRelation(link, "previous");
         }
@@ -98,10 +92,9 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "next" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddNextRelation(this Representation item, string url, HttpMethod method)
+        public void AddNextRelation(string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddNextRelation(new Link { Href = url, Method = method });
@@ -110,9 +103,8 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link "next" in pagination context
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
-        public static void AddNextRelation(this Representation item, Link link)
+        public void AddNextRelation(Link link)
         {
             item.AddRelation(link, "next");
         }
@@ -120,11 +112,10 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation link described by <paramref name="rel"/>
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="rel">The relation type</param>
         /// <param name="url">The url of link</param>
         /// <param name="method">The HTTP method</param>
-        public static void AddRelation(this Representation item, string rel, string url, HttpMethod method)
+        public void AddRelation(string rel, string url, HttpMethod method)
         {
             if (string.IsNullOrWhiteSpace(url)) return;
             item.AddRelation(new Link { Rel = rel, Href = url, Method = method }, rel);
@@ -133,10 +124,9 @@ namespace ToennVaot.Components.Core.Api.Extensions
         /// <summary>
         /// Add the relation described by <paramref name="rel"/> with <paramref name="link"/> value
         /// </summary>
-        /// <param name="item">The extent object</param>
         /// <param name="link">The link</param>
         /// <param name="rel">The relation type</param>
-        public static void AddRelation(this Representation item, Link link, string rel)
+        public void AddRelation(Link link, string rel)
         {
             if(string.IsNullOrWhiteSpace(rel))
                 throw new ArgumentNullException(nameof(rel));
@@ -147,6 +137,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
             if (item.Links.ContainsKey(rel))
                 item.Links.Remove(rel);
             item.Links.Add(rel, link);
+        }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using ToennVaot.Components.Core.Models.Enumerations;
 
 namespace ToennVaot.Components.Core.Extensions
@@ -8,13 +8,14 @@ namespace ToennVaot.Components.Core.Extensions
     /// </summary>
     public static class DateTimeExtensions
     {
+        extension(DateTime date)
+        {
         /// <summary>
         /// Get the elapsed years between current <paramref name="date"/> and <paramref name="compareDate"/>
         /// </summary>
-        /// <param name="date">The current date</param>
         /// <param name="compareDate">The date to compare with</param>
         /// <returns>The elapsed years between dates</returns>
-        public static int ElapsedYears(this DateTime date, DateTime compareDate)
+        public int ElapsedYears(DateTime compareDate)
         {
             var start = date;
             var end = compareDate;
@@ -28,17 +29,16 @@ namespace ToennVaot.Components.Core.Extensions
         /// <summary>
         /// Get the elapsed months between current <paramref name="date"/> and <paramref name="compareDate"/>
         /// </summary>
-        /// <param name="date">The current date</param>
         /// <param name="compareDate">The date to compare with</param>
         /// <param name="excludeYears">Exclude months from elapsed years</param>
         /// <returns>The elapsed months between dates</returns>
-        public static int ElapsedMonths(this DateTime date, DateTime compareDate, bool excludeYears = false)
+        public int ElapsedMonths(DateTime compareDate, bool excludeYears = false)
         {
             var start = date;
             var end = compareDate;
 
             if(start < end)
-                return -ElapsedMonths(compareDate, date);
+                return -compareDate.ElapsedMonths(date);
 
             return start.Month - end.Month - (start.Day < end.Day ? 1 : 0) + (end.Year - start.Year) * 12;
         }
@@ -46,11 +46,10 @@ namespace ToennVaot.Components.Core.Extensions
         /// <summary>
         /// Get the elapsed months between current <paramref name="date"/> and <paramref name="compareDate"/>
         /// </summary>
-        /// <param name="date">The current date</param>
         /// <param name="compareDate">The date to compare with</param>
         /// <param name="excludeYears">Exclude months from elapsed years</param>
         /// <returns>The elapsed months between dates</returns>
-        public static double ElapsedDays(this DateTime date, DateTime compareDate, bool excludeYears = false)
+        public double ElapsedDays(DateTime compareDate, bool excludeYears = false)
         {
             if(!excludeYears)
                 return (compareDate - date).TotalDays;
@@ -61,13 +60,12 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Get the first day of week of the <paramref name="value"/>
+        /// Get the first day of week of the this date
         /// </summary>
-        /// <param name="value">This <see cref="DateTime"/> instance.</param>  
-        /// <returns>The first day of the week of the <paramref name="value"/></returns>
-        public static DateTime FirstDayOfWeek(this DateTime value)
+        /// <returns>The first day of the week of the this date</returns>
+        public DateTime FirstDayOfWeek()
         {
-            var dtNow = new DateTime(value.Year, value.Month, value.Day);
+            var dtNow = new DateTime(date.Year, date.Month, date.Day);
             var n = (int)dtNow.DayOfWeek;
             n = (n + 6) % 7;
 
@@ -75,13 +73,12 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Get the last day of week of the <paramref name="value"/>
+        /// Get the last day of week of the this date
         /// </summary>
-        /// <param name="value">This <see cref="DateTime"/> instance.</param>  
-        /// <returns>The last day of the week of the <paramref name="value"/></returns>
-        public static DateTime LastDayOfWeek(this DateTime value)
+        /// <returns>The last day of the week of the this date</returns>
+        public DateTime LastDayOfWeek()
         {
-            var dtNow = new DateTime(value.Year, value.Month, value.Day);
+            var dtNow = new DateTime(date.Year, date.Month, date.Day);
             var n = (int)dtNow.DayOfWeek;
             n = (n + 6) % 7;
 
@@ -91,21 +88,19 @@ namespace ToennVaot.Components.Core.Extensions
         /// <summary>  
         /// Indicates whether this date is in leap year.  
         /// </summary>  
-        /// <param name="value">This <see cref="DateTime"/> instance.</param>  
         /// <returns>A boolean value indicating whether this date instance is in leap your.</returns>  
-        public static bool IsInLeapYear(this DateTime value)
+        public bool IsInLeapYear()
         {
-            return DateTime.IsLeapYear(value.Year);
+            return DateTime.IsLeapYear(date.Year);
         }
 
         /// <summary>  
         /// Calculate the age of a person based on the date of birth.  
         /// </summary>  
-        /// <param name="date">The date of birth of the person.</param>  
         /// <param name="baseComparisonDate">The present date. Defaults to <see cref="DateTime.Now"/>, if not specified.</param>  
         /// <remarks>This function supports leaper Birthdate (Feb 29).</remarks>  
         /// <returns>Age in years</returns>  
-        public static int CalculateAgeInYears(this DateTime date, DateTime? baseComparisonDate = null)
+        public int CalculateAgeInYears(DateTime? baseComparisonDate = null)
         {
             baseComparisonDate ??= DateTime.Now.Date;
             if (date > baseComparisonDate)
@@ -128,73 +123,90 @@ namespace ToennVaot.Components.Core.Extensions
         /// <summary>
         /// Force the Date kind as Local
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime SpecifyKindAsLocal(this DateTime date)
+        public DateTime SpecifyKindAsLocal()
         {
             return DateTime.SpecifyKind(date, DateTimeKind.Local);
         }
 
+        }
+
+        extension(DateTime? date)
+        {
         /// <summary>
         /// Force the Date kind as Local
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime? SpecifyKindAsLocal(this DateTime? date)
+        public DateTime? SpecifyKindAsLocal()
         {
-            return date.HasValue ? SpecifyKindAsLocal(date.Value) : null;
+            return date.HasValue ? date.Value.SpecifyKindAsLocal() : null;
         }
 
+        }
+
+        extension(DateTime date)
+        {
         /// <summary>
         /// Force the Date kind as UTC
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime SpecifyKindAsUtc(this DateTime date)
+        public DateTime SpecifyKindAsUtc()
         {
             return DateTime.SpecifyKind(date, DateTimeKind.Utc);
         }
 
+        }
+
+        extension(DateTime? date)
+        {
         /// <summary>
         /// Force the Date kind as UTC
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime? SpecifyKindAsUtc(this DateTime? date)
+        public DateTime? SpecifyKindAsUtc()
         {
-            return date.HasValue ? SpecifyKindAsUtc(date.Value) : null;
+            return date.HasValue ? date.Value.SpecifyKindAsUtc() : null;
         }
 
+        }
+
+        extension(DateTime date)
+        {
         /// <summary>
         /// Reset the Time part to 00:00:00
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime ResetTimePart(this DateTime date)
+        public DateTime ResetTimePart()
         {
             return date.Date;
         }
 
+        }
+
+        extension(DateTime? date)
+        {
         /// <summary>
         /// Reset the Time part to 00:00:00
         /// </summary>
-        /// <param name="date"></param>
         /// <returns></returns>
-        public static DateTime? ResetTimePart(this DateTime? date)
+        public DateTime? ResetTimePart()
         {
-            return date.HasValue ? ResetTimePart(date.Value) : null;
+            return date.HasValue ? date.Value.ResetTimePart() : null;
         }
 
+        }
+
+        extension(DateTime value)
+        {
         #region French events
 
         /// <summary>
-        /// Get the French event date of the <paramref name="value"/>
+        /// Get the French event date of the this date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
         /// <param name="e">The french event to get date</param>
         /// <returns>The date</returns>
         /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the <paramref name="e"/> is out of range</exception>
-        public static DateTime GetFrenchEventDate(this DateTime value, FrenchEventEnum e)
+        public DateTime GetFrenchEventDate(FrenchEventEnum e)
         {
             var year = value.Year;
             return e switch
@@ -208,15 +220,14 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Indicates whether the <paramref name="value"/> is a French event date
+        /// Indicates whether the this date is a French event date
         /// </summary>
-        /// <param name="value">This <see cref="DateTime"/> instance.</param> 
         /// <returns>The french event if found. Otherwise, null</returns>
-        public static FrenchEventEnum? IsFrenchEventDate(this DateTime value)
+        public FrenchEventEnum? IsFrenchEventDate()
         {
             foreach (FrenchEventEnum e in Enum.GetValues(typeof(FrenchEventEnum)))
             {
-                if (value.Date == GetFrenchEventDate(value, e).Date)
+                if (value.Date == value.GetFrenchEventDate(e).Date)
                 {
                     return e;
                 }
@@ -229,11 +240,10 @@ namespace ToennVaot.Components.Core.Extensions
         #region Christian events
 
         /// <summary>
-        /// Function returns the Easter date of the <paramref name="value"/>'s year
+        /// Function returns the Easter date of the this date's year
         /// </summary>
-        /// <param name="value">This <see cref="DateTime"/> instance.</param> 
-        /// <returns>Easter date of the <paramref name="value"/>'s year</returns>
-        private static DateTime DateOfEaster(this DateTime value)
+        /// <returns>Easter date of the this date's year</returns>
+        private DateTime DateOfEaster()
         {
             var year = value.Year;
 
@@ -255,12 +265,11 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Get the Christian event date of the <paramref name="value"/>
+        /// Get the Christian event date of the this date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
         /// <param name="e">The christian event to get date</param>
         /// <returns>The date</returns>
-        public static DateTime GetChristianEventDate(this DateTime value, ChristianEventEnum e)
+        public DateTime GetChristianEventDate(ChristianEventEnum e)
         {
             var year = value.Year;
             switch (e)
@@ -272,21 +281,21 @@ namespace ToennVaot.Components.Core.Extensions
                 case ChristianEventEnum.Presentation:
                     return new DateTime(value.Year, 2, 2);
                 case ChristianEventEnum.AshWednesday:
-                    return DateOfEaster(value).AddDays(-46);
+                    return value.DateOfEaster().AddDays(-46);
                 case ChristianEventEnum.PalmSunday:
-                    return DateOfEaster(value).AddDays(-7);
+                    return value.DateOfEaster().AddDays(-7);
                 case ChristianEventEnum.HolyThursday:
-                    return DateOfEaster(value).AddDays(-3);
+                    return value.DateOfEaster().AddDays(-3);
                 case ChristianEventEnum.SaintFriday:
-                    return DateOfEaster(value).AddDays(-2);
+                    return value.DateOfEaster().AddDays(-2);
                 case ChristianEventEnum.Easter:
-                    return DateOfEaster(value);
+                    return value.DateOfEaster();
                 case ChristianEventEnum.EasterMonday:
-                    return DateOfEaster(value).AddDays(1);
+                    return value.DateOfEaster().AddDays(1);
                 case ChristianEventEnum.AscensionDay:
-                    return DateOfEaster(value).AddDays(39);
+                    return value.DateOfEaster().AddDays(39);
                 case ChristianEventEnum.Pentecost:
-                    return DateOfEaster(value).AddDays(49);
+                    return value.DateOfEaster().AddDays(49);
                 case ChristianEventEnum.Assumption:
                     return new DateTime(value.Year, 8, 15);
                 case ChristianEventEnum.AllSaints:
@@ -303,15 +312,14 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Indicates whether the <paramref name="value"/> is a Christian event date
+        /// Indicates whether the this date is a Christian event date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
         /// <returns>The christian event if found. Otherwise, null</returns>
-        public static ChristianEventEnum? IsChristianEventDate(this DateTime value)
+        public ChristianEventEnum? IsChristianEventDate()
         {
             foreach (ChristianEventEnum e in Enum.GetValues(typeof(ChristianEventEnum)))
             {
-                if (value.Date == GetChristianEventDate(value, e).Date)
+                if (value.Date == value.GetChristianEventDate(e).Date)
                 {
                     return e;
                 }
@@ -320,6 +328,8 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         #endregion
+
+        }
 
         #region Muslim events
 
@@ -336,13 +346,14 @@ namespace ToennVaot.Components.Core.Extensions
             (MuslimEventEnum.AidAlAdha, HijriMonthsEnum.DhuAlHijjah, 10)
         ];
 
+        extension(DateTime value)
+        {
         /// <summary>
-        /// Get the Muslim event date of the <paramref name="value"/>
+        /// Get the Muslim event date of the this date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
         /// <param name="e">The muslim event to get date</param>
         /// <returns>The date</returns>
-        public static DateTime GetMuslimEventDate(this DateTime value, MuslimEventEnum e)
+        public DateTime GetMuslimEventDate(MuslimEventEnum e)
         {
             var calendar = new UmAlQuraCalendar();
             var year = value.Year;
@@ -363,15 +374,14 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         /// <summary>
-        /// Indicates whether the <paramref name="value"/> is a Muslim event date
+        /// Indicates whether the this date is a Muslim event date
         /// </summary>
-        /// <param name="value">The <see cref="DateTime"/> instance</param>
         /// <returns>The muslim event if found. Otherwise, null</returns>
-        public static MuslimEventEnum? IsMuslimEventDate(this DateTime value)
+        public MuslimEventEnum? IsMuslimEventDate()
         {
             foreach (var e in MuslimEvents)
             {
-                if (value.Date == GetMuslimEventDate(value, e.value).Date)
+                if (value.Date == value.GetMuslimEventDate(e.value).Date)
                 {
                     return e.value;
                 }
@@ -402,5 +412,7 @@ namespace ToennVaot.Components.Core.Extensions
         }
 
         #endregion
+
+        }
     }
 }

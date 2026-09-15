@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +10,13 @@ namespace ToennVaot.Components.Core.Extensions
     /// </summary>
     public static class BytesExtensions
     {
+        extension(byte[] bytes)
+        {
         /// <summary>
         /// Detects the content-type of a byte array based on its signature.
         /// </summary>
-        /// <param name="bytes">The bytes</param>
         /// <returns>The detected content type</returns>
-        public static string DetectContentType(this byte[] bytes)
+        public string DetectContentType()
         {
             var ansiString = Encoding.ASCII.GetString(bytes);
             if(ansiString.StartsWith("%PDF-"))
@@ -46,6 +47,7 @@ namespace ToennVaot.Components.Core.Extensions
                 return "image/gif";
             // Default to binary stream
             return "application/octet-stream";
+        }
         }
     }
 }

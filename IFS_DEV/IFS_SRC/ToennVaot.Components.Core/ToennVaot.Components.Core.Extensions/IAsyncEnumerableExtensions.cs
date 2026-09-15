@@ -1,17 +1,17 @@
-﻿namespace ToennVaot.Components.Core.Extensions
+namespace ToennVaot.Components.Core.Extensions
 {
     /// <summary>
     /// This class extends <see cref="IAsyncEnumerable{T}"/>
     /// </summary>
     public static class IAsyncEnumerableExtensions
     {
+        extension<T>(IAsyncEnumerable<T> source)
+        {
         /// <summary>
-        /// Get the list of <typeparamref name="T"/> objects
+        /// Get the list of T objects
         /// </summary>
-        /// <typeparam name="T">The type of object</typeparam>
-        /// <param name="source">The async enumerable collection</param>
-        /// <returns>The list of <typeparamref name="T"/> objects</returns>
-        public static Task<List<T>> ToListAsync<T>(this IAsyncEnumerable<T> source)
+        /// <returns>The list of T objects</returns>
+        public Task<List<T>> ToListAsync()
         {
             if (source == null)
             {
@@ -31,6 +31,7 @@
 
                 return list;
             }
+        }
         }
     }
 }

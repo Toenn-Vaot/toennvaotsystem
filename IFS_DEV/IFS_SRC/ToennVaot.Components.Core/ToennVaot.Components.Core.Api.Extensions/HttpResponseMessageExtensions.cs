@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http.Json;
 using ToennVaot.Components.Core.Api.Models;
 
@@ -9,11 +9,12 @@ namespace ToennVaot.Components.Core.Api.Extensions
     /// </summary>
     public static class HttpResponseMessageExtensions
     {
+        extension(HttpResponseMessage response)
+        {
         /// <summary>
         /// Throws an HttpRequestException if the response status code does not indicate success.
         /// </summary>
-        /// <param name="response">The HTTP response message</param>
-        public static void EnsureSuccessStatusCodeAndPropagate(this HttpResponseMessage response)
+        public void EnsureSuccessStatusCodeAndPropagate()
         {
             if (response.IsSuccessStatusCode) return;
             
@@ -37,6 +38,7 @@ namespace ToennVaot.Components.Core.Api.Extensions
                     default:
                         response.EnsureSuccessStatusCode();
                         break;
+                }
                 }
             }
         }
